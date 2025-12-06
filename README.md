@@ -9,7 +9,10 @@ An event listing site for serious carnivores. Built with Astro 5, React, and Typ
 - **Astro 5** - Static site generation with content collections
 - **React 19** - Interactive components
 - **TypeScript** - Strict mode enabled
-- **pnpm** - Package management
+- **pnpm + Turbo** - Package management and build orchestration
+- **Vercel** - Deployment adapter (static output)
+- **postcss-utopia** - Fluid responsive typography and spacing
+- **Fontsource** - Self-hosted fonts (Inter, Oswald)
 
 ## Requirements
 
@@ -40,44 +43,38 @@ src/
     events/events.yaml   # Event data (YAML)
     config.ts            # Zod schema validation
   components/
+    Header.astro         # Site header with hero section
+    Navigation.astro     # Top navigation bar
     EventList.astro      # Fetches & sorts events
     EventCard.astro      # Individual event display
+    LinkButton.astro     # Styled link button
   layouts/
     Layout.astro         # Base HTML layout
   pages/
     index.astro          # Homepage
+    brand.astro          # Brand guidelines page
+  styles/
+    global.css           # Global styles & CSS variables
 docs/
   brand-guidelines.md    # Design manifesto
+  design-guidelines.md   # Design system details
+  photography.md         # Photography guidelines
 ```
 
 ## Brand Guidelines
 
-### Color Palette
-
-| Role | Name | Hex |
-|------|------|-----|
-| Primary | Electric Red | `#E04F5F` |
-| Action/CTA | Mustard Yellow | `#FFDB58` |
-| Text/Borders | Carbon Black | `#000000` |
-| Background | Stark White | `#FFFFFF` |
-
-### Design Principles
-
-- **Typography is Image** - Headlines are massive, condensed, all-caps
-- **No Softness** - Hard edges, thick black borders, no gradients
-- **Raw Imagery** - High-contrast B&W photography
-- **The Slab CTA** - Heavy buttons with 4px+ borders and flat shadows
-
-See [docs/brand-guidelines.md](docs/brand-guidelines.md) for the full design manifesto.
+See [docs/brand-guidelines.md](docs/brand-guidelines.md) and [docs/design-guidelines.md](docs/design-guidelines.md) for the full design manifesto.
 
 ## Content
 
 Events are defined in `src/content/events/events.yaml` with the following schema:
 
 - `date` - Event date
-- `venue` - Venue name
-- `address` - Physical address
-- `googleMapsLink` - Link to Google Maps
+- `primaryVenue` - Main venue object
+  - `name` - Venue name
+  - `address` - Physical address (optional)
+  - `googleMapsLink` - Link to Google Maps (optional)
+- `secondaryVenues` - Array of additional venues (optional)
 - `attendees` - List of attendees
 
 ## License
