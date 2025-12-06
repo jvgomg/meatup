@@ -1,13 +1,13 @@
 # Meat Up // Design Guidelines & Manifesto
 
-> **The vibe:** Bold, confident, and appetizing. A premium butcher shop meeting a modern food blog. It's loud, high-contrast, and unapologetic about its subject matter. **No salads allowed.**
+> **The Vibe:** Bold, confident, and appetizing. A premium butcher shop meeting a modern food blog. It is loud, high-contrast, and unapologetic about its subject matter. **No salads allowed.**
 
 ---
 
 ## 1. Core Principles
 
 1.  **Typography is Image:** Text is not just for reading; it is the primary visual element. Headlines must be massive, condensed, and command attention.
-2.  **Calculated Edges:** We favor clean lines and defined shapes, but not to the point of harshness. Subtle rounded corners and softer shadows are permitted to make the UI feel more polished and approachable.
+2.  **Calculated Edges:** We favor clean lines and defined shapes, but not to the point of harshness. Subtle rounded corners and softer shadows are permitted to make the UI feel more polished and approachable than standard brutalism.
 3.  **The Palette Constraint:** Stick rigidly to the defined four-color palette. Do not deviate.
 4.  **Raw Imagery:** Photography must be high-texture, high-contrast, and preferably Black & White to clash against the loud UI colors. Focus on the grain of the meat, smoke, and metal tools.
 
@@ -17,9 +17,9 @@
 
 ### The Logo
 The primary logo is the **"MU" T-Bone**.
-* A stylized white outline of a thick T-Bone steak slab.
-* The internal marbling and bone shapes are clever negative space forming the initials 'MU'.
-* *Usage:* Typically placed top-left on solid color backgrounds (usually Red).
+* **Concept:** A stylized white outline of a thick T-Bone steak slab.
+* **Detail:** The internal marbling and bone shapes are formed by negative space that explicitly spells out **"MEAT UP"**.
+* **Usage:** Typically placed top-left on solid color backgrounds (usually Electric Red).
 
 ### Color Palette
 
@@ -69,7 +69,7 @@ Buttons should be confident and clear calls to action.
 * **Fill:** Mustard Yellow (`#FFDB58`).
 * **Border:** A clean (2-3px) solid Carbon Black border.
 * **Typography:** Bold, black, all-caps text that is easy to read.
-* **Shadows:** A subtle, soft drop shadow is preferred. A hard, flat shadow can be used as a stylistic alternative for major hero CTAs.
+* **Shadows:** A subtle, soft drop shadow is preferred to lift the element. (Hard, flat shadows are reserved for major Hero CTAs).
 
 ### Borders & Dividers
 * Elements, cards, and sections should be separated by clean, distinct separators. The goal is clarity and structure, not industrial weight.
@@ -85,24 +85,26 @@ Buttons should be confident and clear calls to action.
 ### The Event List ("Upcoming Feasts")
 * **Concept:** The Daily Specials Board. Enticing and easy to browse.
 * **Execution:**
-    * Entries are clean, well-defined cards.
-    * The DATE is a prominent visual element on the card.
+    * Entries are clean, well-defined cards (The "Slab" concept).
+    * The **DATE** is a prominent visual element on the card, treated like a stamp.
     * A clear yellow CTA button on every card ("DETAILS").
 
 ### Single Event Page ("The Main Course")
 * **Concept:** The star of the show. Focus on the delicious details.
 * **Execution:**
-    * Utilize the Split-Screen layout. Left side: Giant B&W photo of the main meat. Right side: Solid red background with logistical details in a clear, checklist-style format.
-    * The "RSV-PORK" button should be sticky at the bottom of the viewport on mobile.
+    * Utilize the Split-Screen layout.
+    * **Left:** Giant B&W photo of the main meat.
+    * **Right:** Solid Electric Red background with logistical details in a clear, checklist-style format.
+    * The **"RSV-PORK"** button sticks to the bottom of the viewport on mobile.
 
 ### Ratings ("The Flavor Scale")
 * **Concept:** A straightforward measure of deliciousness.
 * **Execution:**
-    * Replace 5-star scales with visceral text ranges: "RARE AF" (5/5) down to "BURNT HOCKEY PUCK" (1/5).
+    * Replace 5-star scales with visceral text ranges: **"RARE AF"** (5/5) down to **"BURNT HOCKEY PUCK"** (1/5).
     * Visualized using clean, horizontal progress bars with black outlines.
 
 ### User Profile ("Your Butcher's Apron")
 * **Concept:** A collection of your culinary achievements.
 * **Execution:**
-    * Badges are bold, shield-shaped icons with brand colors and black outlines.
-    * Profile header could feature a subtle texture, like a clean butcher block or stainless steel.
+    * **Badges:** Bold, shield-shaped icons with brand colors and black outlines.
+    * **Header:** Background texture should feature a subtle clean butcher block (wood grain) or brushed stainless steel.

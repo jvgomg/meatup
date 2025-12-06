@@ -1,0 +1,50 @@
+---
+// src/components/Button.astro
+interface Props {
+	href?: string;
+	variant?: 'primary';
+	className?: string;
+}
+
+const { href, variant = 'primary', className } = Astro.props;
+
+const Tag = href ? 'a' : 'button';
+---
+
+<Tag class:list={['button', variant, className]} href={href}>
+	<slot />
+</Tag>
+
+<style>
+	.button {
+		display: inline-block;
+		padding: 0.75rem 1.5rem;
+		text-decoration: none;
+		font-family: var(--font-body);
+		font-weight: 700;
+		text-transform: uppercase;
+		font-size: var(--text-ui);
+		letter-spacing: 0.05em;
+		cursor: pointer;
+		transition:
+			transform 0.2s ease,
+			box-shadow 0.2s ease;
+	}
+
+	.button.primary {
+		background-color: var(--mustard-yellow);
+		color: var(--carbon-black);
+		border: 3px solid var(--carbon-black);
+		box-shadow: 4px 4px 0px var(--carbon-black);
+	}
+
+	.button:hover {
+		transform: translate(-2px, -2px);
+		box-shadow: 6px 6px 0px var(--carbon-black);
+	}
+
+	.button:active {
+		transform: translate(2px, 2px);
+		box-shadow: 2px 2px 0px var(--carbon-black);
+	}
+</style>
