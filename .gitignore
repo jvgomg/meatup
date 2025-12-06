@@ -29,6 +29,7 @@ pnpm-debug.log*
 # private files
 eventsdraft.csv
 _chat.txt
+local/attendee-aliases.*
 
 # vercel output
 .vercel
