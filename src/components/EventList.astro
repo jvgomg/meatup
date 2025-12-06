@@ -4,17 +4,73 @@ import EventCard from './EventCard.astro';
 
 const entry = await getEntry('events', 'events');
 if (!entry) throw new Error('Events not found');
-const events = entry.data.toSorted((a, b) => b.date.getTime() - a.date.getTime());
-const totalEvents = events.length;
+const upcomingStatuses = new Set(['scheduled', 'planning']);
+const eventsDescending = entry.data
+  .map((event) => ({ ...event, status: event.status ?? 'scheduled' }))
+  .toSorted((a, b) => b.date.getTime() - a.date.getTime())
+  .map((event, index, list) => ({
+    ...event,
+    eventNumber: list.length - index,
+  }));
+
+const upcomingEvents = eventsDescending
+  .filter((event) => upcomingStatuses.has(event.status))
+  .toSorted((a, b) => b.date.getTime() - a.date.getTime());
+
+const pastEvents = eventsDescending.filter((event) => !upcomingStatuses.has(event.status));
 ---
 
-<ul class="events">
-  {events.map((event, index) => (
-    <EventCard {...event} eventNumber={totalEvents - index} />
-  ))}
-</ul>
+<section class="event-sections">
+  {upcomingEvents.length > 0 && (
+    <div class="events-group">
+      <header class="events-group__header">
+        <p class="eyebrow">Upcoming meatings</p>
+      </header>
+      <ul class="events">
+        {upcomingEvents.map((event) => (
+          <EventCard {...event} />
+        ))}
+      </ul>
+    </div>
+  )}
+
+  {pastEvents.length > 0 && (
+    <div class="events-group">
+      <header class="events-group__header">
+        <p class="eyebrow">Past meatings</p>
+      </header>
+      <ul class="events">
+        {pastEvents.map((event) => (
+          <EventCard {...event} />
+        ))}
+      </ul>
+    </div>
+  )}
+</section>
 
 <style>
+  .event-sections {
+    display: grid;
+    gap: var(--space-xl);
+  }
+
+  .events-group {
+    display: grid;
+    gap: var(--space-m);
+  }
+
+  .events-group__header {
+    display: grid;
+    gap: var(--space-3xs);
+  }
+
+  .eyebrow {
+    font-size: var(--text-ui);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.7;
+  }
+
   .events {
     list-style: none;
     padding: 0;

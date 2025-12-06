@@ -7,10 +7,12 @@ interface Venue {
   googleMapsLink?: string;
 }
 
+type EventStatus = 'completed' | 'failed' | 'scheduled' | 'planning';
+
 interface Props {
   eventNumber: number;
   date: Date;
-  status?: 'completed' | 'failed';
+  status?: EventStatus;
   primaryVenue: Venue;
   secondaryVenues?: Venue[];
   note?: string;
@@ -22,25 +24,46 @@ const {
   date,
   primaryVenue,
   secondaryVenues,
-  status = 'completed',
+  status = 'scheduled',
   note,
 } = Astro.props;
+
+const statusLabels: Record<EventStatus, string> = {
+  completed: 'Completed',
+  failed: 'Failed',
+  scheduled: 'Booked',
+  planning: 'Planning',
+};
+
+const statusMeta: Partial<Record<EventStatus, string>> = {
+  failed: 'Plan changed on the day.',
+  scheduled: 'Booking secured, details locked.',
+  planning: 'Date pencilled, booking in progress.',
+};
+
+const statusBadge = status !== 'completed' ? `status-badge--${status}` : '';
+const eventToneClass = status !== 'completed' ? `event--${status}` : '';
 ---
 
-<li class={`event ${status === 'failed' ? 'event--failed' : ''}`}>
+<li class:list={['event', eventToneClass]}>
   <div class="event-number">{eventNumber.toString().padStart(3, '0')}</div>
   <div class="details">
     <div class="event-heading">
       <h2>{primaryVenue.name}</h2>
-      {status === 'failed' && <span class="status-badge">FAILED</span>}
+      {status !== 'completed' && (
+        <span class:list={['status-badge', statusBadge]}>{statusLabels[status]}</span>
+      )}
     </div>
-    <time datetime={date.toISOString()}>
-      {date.toLocaleDateString('en-GB', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-      })}
-    </time>
+    <div class="meta">
+      <time datetime={date.toISOString()}>
+        {date.toLocaleDateString('en-GB', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        })}
+      </time>
+      {statusMeta[status] && <span class="status-copy">{statusMeta[status]}</span>}
+    </div>
     {primaryVenue.googleMapsLink && (
       <div class="actions">
         <LinkButton href={primaryVenue.googleMapsLink} target="_blank" rel="noopener nofollow">Open in Maps</LinkButton>
@@ -73,6 +96,29 @@ const {
     display: flex;
     align-items: center;
     gap: var(--space-l);
+    background: linear-gradient(
+      120deg,
+      rgba(255, 255, 255, 0.02),
+      rgba(255, 255, 255, 0.005)
+    );
+  }
+
+  .event--scheduled {
+    border-color: var(--mustard-yellow);
+    background: linear-gradient(
+      120deg,
+      rgba(255, 205, 86, 0.12),
+      rgba(255, 205, 86, 0.04)
+    );
+  }
+
+  .event--planning {
+    border-style: dashed;
+    background: linear-gradient(
+      120deg,
+      rgba(255, 255, 255, 0.08),
+      rgba(255, 255, 255, 0.02)
+    );
   }
 
   .event--failed {
@@ -102,21 +148,50 @@ const {
   }
 
   .status-badge {
-    border: 2px solid var(--electric-red);
-    color: var(--electric-red);
     padding: var(--space-3xs) var(--space-2xs);
     font-size: var(--text-ui);
     letter-spacing: 0.08em;
     text-transform: uppercase;
     font-weight: 700;
-    transform: rotate(-5deg);
+    transform: rotate(-3deg);
     display: inline-block;
+  }
+
+  .status-badge--failed {
+    border: 2px solid var(--electric-red);
+    color: var(--electric-red);
+    background: rgba(224, 79, 95, 0.08);
+  }
+
+  .status-badge--scheduled {
+    border: 2px solid var(--carbon-black);
+    background: var(--mustard-yellow);
+    color: var(--carbon-black);
+    box-shadow: 3px 3px 0px var(--carbon-black);
+  }
+
+  .status-badge--planning {
+    border: 2px dashed var(--stark-white);
+    color: var(--stark-white);
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  .meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-s);
+    margin: var(--space-2xs) 0 var(--space-xs);
+    flex-wrap: wrap;
   }
 
   .details time {
     opacity: 0.7;
-    display: block;
-    margin: var(--space-2xs) 0;
+    display: inline-block;
+  }
+
+  .status-copy {
+    font-size: var(--text-ui);
+    opacity: 0.7;
   }
 
   .actions {

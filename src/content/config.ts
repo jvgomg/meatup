@@ -11,7 +11,9 @@ const events = defineCollection({
   schema: z.array(
     z.object({
       date: z.coerce.date(),
-      status: z.enum(['completed', 'failed']).default('completed'),
+      status: z
+        .enum(['completed', 'failed', 'scheduled', 'planning'])
+        .default('scheduled'),
       primaryVenue: venueSchema,
       secondaryVenues: z.array(venueSchema).optional(),
       note: z.string().optional(),
