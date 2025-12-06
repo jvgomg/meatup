@@ -27,6 +27,7 @@
     "sharp": "^0.34.5"
   },
   "devDependencies": {
+    "postcss-utopia": "^1.1.0",
     "turbo": "^2.6.3"
   }
 }

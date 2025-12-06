@@ -80,30 +80,30 @@ import LinkButton from '../components/LinkButton.astro';
 	.container {
 		max-width: 1200px;
 		margin: 0 auto;
-		padding: 4rem 2rem;
+		padding: var(--space-2xl) var(--space-l);
 	}
 
 	header {
 		text-align: center;
-		margin-bottom: 4rem;
+		margin-bottom: var(--space-2xl);
 		border-bottom: 2px solid var(--carbon-black);
-		padding-bottom: 2rem;
+		padding-bottom: var(--space-l);
 	}
 
 	section {
-		margin-bottom: 4rem;
+		margin-bottom: var(--space-2xl);
 	}
 
 	section h2 {
-		margin-bottom: 2rem;
+		margin-bottom: var(--space-l);
 		border-bottom: 1px solid #eee;
-		padding-bottom: 1rem;
+		padding-bottom: var(--space-s);
 	}
 
 	.swatch-grid {
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-		gap: 2rem;
+		gap: var(--space-l);
 	}
 
 	.swatch-color {
@@ -113,21 +113,21 @@ import LinkButton from '../components/LinkButton.astro';
 	}
 
 	.swatch-label {
-		padding: 1rem 0;
+		padding: var(--space-s) 0;
 	}
 
 	.swatch-label h3 {
-		font-size: 1.25rem;
-		margin-bottom: 0.25rem;
+		font-size: var(--step-1);
+		margin-bottom: var(--space-3xs);
 	}
 
 	.swatch-label p {
 		font-family: monospace;
-		font-size: 1rem;
+		font-size: var(--step-0);
 	}
 
 	.type-showcase > * {
-		margin-bottom: 1.5rem;
+		margin-bottom: var(--space-m);
 	}
 
 	.hero-text {
@@ -149,10 +149,10 @@ import LinkButton from '../components/LinkButton.astro';
 
 	.component-display {
 		background-color: #f5f5f5;
-		padding: 2rem;
+		padding: var(--space-l);
 		border: 1px solid #eee;
 		display: flex;
-		gap: 1rem;
+		gap: var(--space-s);
 		align-items: center;
 	}
 </style>
