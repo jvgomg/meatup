@@ -30,7 +30,7 @@
 <style>
   .site-header {
     position: relative;
-    background-color: #111; /* fallback for top area */
+    background-color: var(--carbon-black);
   }
 
   .top-bar {
@@ -45,7 +45,7 @@
     z-index: 10;
     box-sizing: border-box;
   }
-  
+
   .left-nav {
       display: flex;
       align-items: center;
@@ -53,10 +53,10 @@
   }
 
   .logo a {
-    font-family: 'Anton', sans-serif;
+    font-family: var(--font-display);
     font-size: 1.5rem;
     text-decoration: none;
-    color: #fff;
+    color: var(--stark-white);
     text-transform: uppercase;
   }
 
@@ -66,9 +66,9 @@
   }
 
   .top-bar nav a {
-    color: #fff;
+    color: var(--stark-white);
     text-decoration: none;
-    font-family: sans-serif;
+    font-family: var(--font-body);
     text-transform: uppercase;
     font-size: 0.8rem;
     letter-spacing: 0.1em;
@@ -81,11 +81,11 @@
   }
 
   .cta-button {
-      background-color: #ff0000;
-      color: #000;
+      background-color: var(--electric-red);
+      color: var(--carbon-black);
       padding: 0.5rem 1.5rem;
       text-decoration: none;
-      font-family: 'Anton', sans-serif;
+      font-family: var(--font-display);
       text-transform: uppercase;
       font-size: 0.9rem;
   }
@@ -98,8 +98,8 @@
   }
 
   .hero-left {
-    background-color: #ff0000;
-    color: #000;
+    background-color: var(--electric-red);
+    color: var(--carbon-black);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -107,11 +107,11 @@
   }
 
   .hero-left h1 {
-    font-family: 'Anton', sans-serif;
+    font-family: var(--font-display);
     font-size: clamp(3rem, 10vw, 8rem);
     line-height: 1;
     margin: 0;
-    color: #000;
+    color: var(--carbon-black);
     text-transform: uppercase;
   }
 

@@ -1,23 +1,55 @@
-@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Inter:wght@400;600;700&display=swap');
+
+:root {
+  /* Color Palette */
+  --electric-red: #E04F5F;
+  --mustard-yellow: #FFDB58;
+  --carbon-black: #000000;
+  --stark-white: #FFFFFF;
+
+  /* Font Families */
+  --font-display: 'Oswald', sans-serif;
+  --font-body: 'Inter', sans-serif;
+
+  /* Type Scale */
+  --text-hero: clamp(3rem, 10vw, 6rem);
+  --text-section: clamp(2rem, 5vw, 3rem);
+  --text-card: 1.5rem;
+  --text-body: 1rem;
+  --text-ui: 0.75rem;
+}
 
 body {
-  background-color: #111;
-  color: #fff;
-  font-family: sans-serif;
+  background-color: var(--carbon-black);
+  color: var(--stark-white);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: 1.5;
   margin: 0;
 }
 
 a {
-	color: #fff;
-	text-decoration: none;
+  color: var(--stark-white);
+  text-decoration: none;
 }
 
 h1, h2, h3 {
-	font-family: 'Anton', sans-serif;
-	text-transform: uppercase;
-  letter-spacing: 0.1em;
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 0.9;
+  margin: 0;
 }
 
-.text-red {
-	color: #ff0000;
+h1 {
+  font-size: var(--text-hero);
+}
+
+h2 {
+  font-size: var(--text-section);
+}
+
+h3 {
+  font-size: var(--text-card);
 }
