@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+import hotDogImage from '../assets/hot-dog.jpg';
 ---
 <header class="site-header">
   <div class="top-bar">
@@ -22,7 +24,7 @@
       <h1>We have<br>the meats.</h1>
     </div>
     <div class="hero-right">
-      <!-- BG image -->
+      <Image src={hotDogImage} alt="Delicious hot dog" />
     </div>
   </div>
 </header>
@@ -116,9 +118,17 @@
   }
 
   .hero-right {
-    background-image: url('/images/hot-dog.jpg');
-    background-size: cover;
-    background-position: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-right img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
   }
 
   @media (max-width: 768px) {
