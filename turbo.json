@@ -2,7 +2,7 @@
   "$schema": "https://turbo.build/schema.json",
   "tasks": {
     "astro:build": {
-      "outputs": ["dist/**"],
+      "outputs": ["dist/**", ".vercel/**"],
       "inputs": ["src/**", "public/**", "astro.config.*", "tsconfig.json"]
     },
     "astro:dev": {
@@ -10,7 +10,9 @@
       "persistent": true
     },
     "astro:preview": {
-      "dependsOn": ["astro:build"]
+      "dependsOn": ["astro:build"],
+      "cache": false,
+      "persistent": true
     }
   }
 }
