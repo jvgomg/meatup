@@ -24,7 +24,13 @@ import hotDogImage from '../assets/hot-dog.jpg';
       <h1>We have<br>the meats.</h1>
     </div>
     <div class="hero-right">
-      <Image src={hotDogImage} alt="Delicious hot dog" />
+      <Image
+        src={hotDogImage}
+        alt="Delicious hot dog"
+        widths={[640, 750, 828, 1080, 1200, 1920, 2048, 3840]}
+        sizes="50vw"
+        loading="eager"
+      />
     </div>
   </div>
 </header>
