@@ -1,23 +1,66 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import EventList from '../components/EventList.astro';
+import Header from '../components/Header.astro';
 ---
 
 <Layout>
-	<main>
-		<h1>Upcoming Events</h1>
-		<EventList />
-	</main>
+  <Header />
+  <main>
+    <section class="about">
+      <h2>About Us</h2>
+      <p>We're a community of meat lovers, dedicated to the art of cooking and eating meat. We host regular "meatings" to share our passion and our plates.</p>
+      <a href="/about">More about us</a>
+    </section>
+
+    <section class="past-meatings">
+      <h2>Past Meatings</h2>
+      <EventList />
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2025 Meat Up</p>
+  </footer>
 </Layout>
 
 <style>
-	main {
-		max-width: 800px;
-		margin: 0 auto;
-		padding: 2rem;
-	}
+  main {
+    background-color: #111;
+  }
+  .about {
+    text-align: center;
+    padding: 4rem 2rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
 
-	h1 {
-		margin-bottom: 2rem;
-	}
+  .about h2 {
+    font-size: 3rem;
+    margin-bottom: 2rem;
+  }
+
+  .about p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+  }
+
+  .about a {
+    text-decoration: underline;
+  }
+
+  .past-meatings {
+    padding: 4rem 2rem;
+  }
+
+  .past-meatings h2 {
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 2rem;
+  }
+
+  footer {
+    text-align: center;
+    padding: 2rem;
+    margin-top: 4rem;
+  }
 </style>

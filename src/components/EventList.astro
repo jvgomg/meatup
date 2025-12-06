@@ -5,11 +5,12 @@ import EventCard from './EventCard.astro';
 const entry = await getEntry('events', 'events');
 if (!entry) throw new Error('Events not found');
 const events = entry.data.toSorted((a, b) => b.date.getTime() - a.date.getTime());
+const totalEvents = events.length;
 ---
 
 <ul class="events">
-  {events.map((event) => (
-    <EventCard {...event} />
+  {events.map((event, index) => (
+    <EventCard {...event} eventNumber={totalEvents - index} />
   ))}
 </ul>
 

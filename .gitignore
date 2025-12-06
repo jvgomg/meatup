@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 # turbo
 .turbo/
+
+# files
+eventsdraft.csv

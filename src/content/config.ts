@@ -7,8 +7,9 @@ const events = defineCollection({
       date: z.coerce.date(),
       venue: z.string(),
       address: z.string(),
-      googleMapsLink: z.string().url(),
+      googleMapsLink: z.string().url().optional(),
       attendees: z.array(z.string()),
+      type: z.string(),
     }),
   ),
 })

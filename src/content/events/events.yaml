@@ -1,17 +1,74 @@
-- date: 2024-01-15
-  venue: The Local Pub
-  address: 123 Main Street, Sydney NSW 2000
-  googleMapsLink: https://maps.google.com/?q=123+Main+Street+Sydney+NSW+2000
-  attendees:
-    - James
-    - Sarah
-    - Mike
-
-- date: 2024-02-20
-  venue: The Beer Garden
-  address: 456 High Street, Melbourne VIC 3000
-  googleMapsLink: https://maps.google.com/?q=456+High+Street+Melbourne+VIC+3000
-  attendees:
-    - James
-    - Tom
-    - Lisa
+- date: 2023-10-10
+  type: "Meat Up Dinner & Drinks"
+  venue: "Horseshoe Inn (Pre-drinks), Undisclosed Restaurant (Dinner)"
+  googleMapsLink: "https://maps.app.goo.gl/omSPC5B5cXdBMfFz5?g_st=ic"
+  address: ""
+  attendees: []
+- date: 2023-11-23
+  type: "Meat Up Dinner"
+  venue: "Smokestak"
+  googleMapsLink: "https://maps.app.goo.gl/Cfo4QGXioPPgefaF7"
+  address: ""
+  attendees: []
+- date: 2024-03-07
+  type: "Meat Up Dinner & Pre-drinks"
+  venue: "Clerkenwell Tavern (Pre-drinks), Quality Chop House (Dinner, Implied booking)"
+  googleMapsLink: "https://maps.app.goo.gl/RjcY95tqBjngbTWH9?g_st=iw"
+  address: ""
+  attendees: []
+- date: 2024-05-09
+  type: "Non-Meat Up Drinks"
+  venue: "The Oxford Market/Nearby Pub"
+  address: ""
+  attendees: []
+- date: 2024-06-27
+  type: "Meat Up Dinner & Pre-drinks"
+  venue: "Queens Larder (Pre-drinks), Swiss Butter (Dinner)"
+  googleMapsLink: "https://maps.app.goo.gl/jsPU8iULJ7921ACC7?g_st=iw"
+  address: ""
+  attendees: []
+- date: 2024-07-27
+  type: "BBQ/Pub Crawl (Meat Up on Tour)"
+  venue: "Renegade Urban Winery, Exale/Black Cactus BBQ (Dinner)"
+  address: ""
+  attendees: []
+- date: 2024-09-11
+  type: "Meat Up Dinner & Pre-drinks"
+  venue: "Betsy Trottwood (Pre-drinks), Horseshoe Inn (Pre-drinks), Texas Joes (Dinner)"
+  address: ""
+  attendees: []
+- date: 2025-02-20
+  type: "Meat Up Dinner & Pre-drinks"
+  venue: "Queens Head (Pre-drinks), Blacklock (Soho) (Dinner)"
+  address: ""
+  attendees: []
+- date: 2025-03-18
+  type: "Meat Up (Pivoted Dinner) & Pre-drinks"
+  venue: "Unnamed Pub, then another location for meat"
+  googleMapsLink: "https://maps.app.goo.gl/RUmzZwAfztbJ31caA?g_st=com.google.maps.preview.copy"
+  address: ""
+  attendees: []
+- date: 2025-07-17
+  type: "Meat Up Dinner & Pre-drinks"
+  venue: "Unnamed Pub (Pre-drinks), Lord Nelson (Dinner)"
+  googleMapsLink: "https://maps.app.goo.gl/57qjjWK1ZtBvGiXa9?g_st=ipc"
+  address: ""
+  attendees: []
+- date: 2025-08-28
+  type: "Meat Up Dinner & Pre-drinks"
+  venue: "Queen's Head (Pre-drinks), Fowl (Dinner)"
+  googleMapsLink: "https://maps.app.goo.gl/66FVEPKjy4ZpdA9s7?g_st=ac"
+  address: ""
+  attendees: []
+- date: 2025-10-09
+  type: "Meat Up Dinner & Pre-drinks"
+  venue: "Unnamed Pub (Pre-drinks), Burger and Beyond Soho (Dinner)"
+  googleMapsLink: "https://maps.app.goo.gl/iZFJPdqzrjx4AW6XA?g_st=ipc"
+  address: ""
+  attendees: []
+- date: 2025-12-03
+  type: "Christmas Meat Up Dinner & Pre-drinks"
+  venue: "Unnamed Pub (Pre-drinks), Guinea Grill (Dinner)"
+  googleMapsLink: "https://maps.app.goo.gl/wVvXzxSv6cN6ueCs9?g_st=ipc"
+  address: ""
+  attendees: []

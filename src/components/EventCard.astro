@@ -1,59 +1,68 @@
 ---
 interface Props {
+  eventNumber: number;
   date: Date;
   venue: string;
   address: string;
-  googleMapsLink: string;
+  googleMapsLink?: string;
   attendees: string[];
+  type: string;
 }
 
-const { date, venue, address, googleMapsLink, attendees } = Astro.props;
+const { eventNumber, date, venue, address, googleMapsLink, attendees, type } = Astro.props;
 ---
 
 <li class="event">
-  <h2>{venue}</h2>
-  <time datetime={date.toISOString()}>
-    {date.toLocaleDateString('en-GB', {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    })}
-  </time>
-  <p class="address">{address}</p>
-  <a href={googleMapsLink} target="_blank" rel="noopener">View on Google Maps</a>
-  <div class="attendees">
-    <strong>Attendees:</strong>
-    <ul>
-      {attendees.map((name) => <li>{name}</li>)}
-    </ul>
+  <div class="event-number">
+    {eventNumber.toString().padStart(3, '0')}
+  </div>
+  <div class="details">
+    <h2>{venue}</h2>
+    <p class="type">{type}</p>
+    <time datetime={date.toISOString()}>
+      {date.toLocaleDateString('en-GB', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      })}
+    </time>
+    {googleMapsLink && <a href={googleMapsLink} target="_blank" rel="noopener">View on Google Maps</a>}
   </div>
 </li>
 
 <style>
   .event {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 1.5rem;
+    border: 2px solid #fff;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
   }
 
-  .event h2 {
-    margin: 0 0 0.5rem;
+  .event-number {
+    font-family: 'Anton', sans-serif;
+    font-size: 4rem;
+    color: #ffc700;
   }
 
-  .event time {
-    color: #666;
+  .details h2 {
+    font-size: 2.5rem;
+    margin: 0;
   }
 
-  .address {
+  .details .type {
+    font-size: 1.5rem;
+    margin: 0.5rem 0;
+    color: #aaa;
+  }
+
+  .details time {
+    color: #aaa;
+    display: block;
     margin: 0.5rem 0;
   }
 
-  .attendees {
-    margin-top: 1rem;
-  }
-
-  .attendees ul {
-    margin: 0.5rem 0 0 1.5rem;
+  .details a {
+    text-decoration: underline;
   }
 </style>
