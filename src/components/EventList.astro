@@ -4,7 +4,7 @@ import EventCard from './EventCard.astro';
 
 const entry = await getEntry('events', 'events');
 if (!entry) throw new Error('Events not found');
-const upcomingStatuses = new Set(['scheduled', 'planning']);
+const upcomingStatuses = new Set(['scheduled']);
 const eventsDescending = entry.data
   .map((event) => ({ ...event, status: event.status ?? 'scheduled' }))
   .toSorted((a, b) => b.date.getTime() - a.date.getTime())
