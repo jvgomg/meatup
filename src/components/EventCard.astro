@@ -1,5 +1,5 @@
 ---
-import Button from './Button.astro';
+import LinkButton from './LinkButton.astro';
 
 interface Venue {
   name: string;
@@ -32,7 +32,7 @@ const { eventNumber, date, primaryVenue, secondaryVenues } = Astro.props;
       })}
     </time>
     {primaryVenue.googleMapsLink && (
-      <Button href={primaryVenue.googleMapsLink}>Open in Maps</Button>
+      <LinkButton href={primaryVenue.googleMapsLink} target="_blank" rel="noopener nofollow">Open in Maps</LinkButton>
     )}
     {secondaryVenues && secondaryVenues.length > 0 && (
       <ul class="secondary-venues">
@@ -40,7 +40,7 @@ const { eventNumber, date, primaryVenue, secondaryVenues } = Astro.props;
           <li>
             <span>{venue.name}</span>
             {venue.googleMapsLink && (
-              <a href={venue.googleMapsLink} target="_blank" rel="noopener">Open in Maps</a>
+              <a href={venue.googleMapsLink} target="_blank" rel="noopener nofollow">Open in Maps</a>
             )}
           </li>
         ))}

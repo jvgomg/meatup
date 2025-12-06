@@ -1,19 +1,17 @@
 ---
-// src/components/Button.astro
-interface Props {
-	href?: string;
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends HTMLAttributes<'a'> {
 	variant?: 'primary';
 	className?: string;
 }
 
-const { href, variant = 'primary', className } = Astro.props;
-
-const Tag = href ? 'a' : 'button';
+const {  variant = 'primary', className, ...rest } = Astro.props;
 ---
 
-<Tag class:list={['button', variant, className]} href={href}>
+<a class:list={['button', variant, className]} {...rest}>
 	<slot />
-</Tag>
+</a>
 
 <style>
 	.button {
