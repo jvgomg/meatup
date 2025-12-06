@@ -10,20 +10,30 @@ interface Venue {
 interface Props {
   eventNumber: number;
   date: Date;
+  status?: 'completed' | 'failed';
   primaryVenue: Venue;
   secondaryVenues?: Venue[];
+  note?: string;
   attendees: string[];
 }
 
-const { eventNumber, date, primaryVenue, secondaryVenues } = Astro.props;
+const {
+  eventNumber,
+  date,
+  primaryVenue,
+  secondaryVenues,
+  status = 'completed',
+  note,
+} = Astro.props;
 ---
 
-<li class="event">
-  <div class="event-number">
-    {eventNumber.toString().padStart(3, '0')}
-  </div>
+<li class={`event ${status === 'failed' ? 'event--failed' : ''}`}>
+  <div class="event-number">{eventNumber.toString().padStart(3, '0')}</div>
   <div class="details">
-    <h2>{primaryVenue.name}</h2>
+    <div class="event-heading">
+      <h2>{primaryVenue.name}</h2>
+      {status === 'failed' && <span class="status-badge">FAILED</span>}
+    </div>
     <time datetime={date.toISOString()}>
       {date.toLocaleDateString('en-GB', {
         year: 'numeric',
@@ -32,7 +42,14 @@ const { eventNumber, date, primaryVenue, secondaryVenues } = Astro.props;
       })}
     </time>
     {primaryVenue.googleMapsLink && (
-      <LinkButton href={primaryVenue.googleMapsLink} target="_blank" rel="noopener nofollow">Open in Maps</LinkButton>
+      <div class="actions">
+        <LinkButton href={primaryVenue.googleMapsLink} target="_blank" rel="noopener nofollow">Open in Maps</LinkButton>
+      </div>
+    )}
+    {note && (
+      <div class={`note ${status === 'failed' ? 'note--failed' : ''}`}>
+        {note}
+      </div>
     )}
     {secondaryVenues && secondaryVenues.length > 0 && (
       <ul class="secondary-venues">
@@ -58,20 +75,56 @@ const { eventNumber, date, primaryVenue, secondaryVenues } = Astro.props;
     gap: var(--space-l);
   }
 
+  .event--failed {
+    border-color: var(--electric-red);
+    background: linear-gradient(
+      120deg,
+      rgba(224, 79, 95, 0.08),
+      rgba(224, 79, 95, 0.02)
+    );
+  }
+
   .event-number {
     font-family: var(--font-display);
     font-size: var(--step-5);
     color: var(--mustard-yellow);
   }
 
+  .event-heading {
+    display: flex;
+    align-items: center;
+    gap: var(--space-s);
+    flex-wrap: wrap;
+  }
+
   .details h2 {
     font-size: var(--text-section);
+  }
+
+  .status-badge {
+    border: 2px solid var(--electric-red);
+    color: var(--electric-red);
+    padding: var(--space-3xs) var(--space-2xs);
+    font-size: var(--text-ui);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 700;
+    transform: rotate(-5deg);
+    display: inline-block;
   }
 
   .details time {
     opacity: 0.7;
     display: block;
     margin: var(--space-2xs) 0;
+  }
+
+  .actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-s);
+    margin: var(--space-s) 0;
+    flex-wrap: wrap;
   }
 
   .secondary-venues {
@@ -91,5 +144,21 @@ const { eventNumber, date, primaryVenue, secondaryVenues } = Astro.props;
 
   .secondary-venues a {
     text-decoration: underline;
+  }
+
+  .note {
+    margin: var(--space-s) 0 0;
+    padding: var(--space-s);
+    background: rgba(255, 255, 255, 0.04);
+    border: 2px solid var(--stark-white);
+    box-shadow: 3px 3px 0px var(--carbon-black);
+    font-size: var(--text-ui);
+    line-height: 1.4;
+  }
+
+  .note--failed {
+    border-color: var(--electric-red);
+    box-shadow: 3px 3px 0px var(--carbon-black);
+    background: rgba(224, 79, 95, 0.08);
   }
 </style>

@@ -26,8 +26,9 @@ pnpm-debug.log*
 # turbo
 .turbo/
 
-# files
+# private files
 eventsdraft.csv
+_chat.txt
 
 # vercel output
 .vercel

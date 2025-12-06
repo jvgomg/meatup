@@ -1,15 +1,17 @@
 - date: 2023-10-10
   primaryVenue:
-    name: "Undisclosed Restaurant"
+    name: "Texas Joe's Slow Smoked Meats"
     googleMapsLink: "https://maps.app.goo.gl/omSPC5B5cXdBMfFz5?g_st=ic"
   secondaryVenues:
     - name: "Horseshoe Inn"
+  note: "First meat up: 7:30 booking near Big T’s secret pool club, pre-beers at Horseshoe, then maybe N1 Bar if we weren’t flatlining."
   attendees: []
 
 - date: 2023-11-23
   primaryVenue:
     name: "Smokestak"
     googleMapsLink: "https://maps.app.goo.gl/Cfo4QGXioPPgefaF7"
+  note: "Boys’ night minus Rico (stuck in Jersey); 7/7:30 table, pre-pint nearby. Brisket was fine, smoke was biblical—clothes straight to the balcony/dry cleaner."
   attendees: []
 
 - date: 2024-03-07
@@ -18,62 +20,78 @@
     googleMapsLink: "https://maps.app.goo.gl/RjcY95tqBjngbTWH9?g_st=iw"
   secondaryVenues:
     - name: "Clerkenwell Tavern"
+      googleMapsLink: "https://maps.google.com/?q=Clerkenwell+Tavern,+137-139+St+John+St,+London+EC1V+4JP"
+  note: "Poll shuffle, Martin booked; Big T nearly bailed for an interview. Pre-Guinness from ~6 at Clerkenwell Tavern before dinner."
   attendees: []
 
 - date: 2024-05-09
   primaryVenue:
     name: "The Oxford Market"
+    googleMapsLink: "https://maps.google.com/?q=The+Oxford+Market,+11-13+Market+Place,+London+W1W+8AH"
+  note: "Chill round with partners welcome; Rico revising. Pub was heaving, lots of fridge-selling and ‘is it even open?’ banter."
   attendees: []
 
 - date: 2024-06-27
   primaryVenue:
     name: "Swiss Butter"
-    googleMapsLink: "https://maps.app.goo.gl/jsPU8iULJ7921ACC7?g_st=iw"
+    googleMapsLink: "https://maps.google.com/?q=Swiss+Butter,+114-118+Southampton+Row,+London+WC1B+4BL"
   secondaryVenues:
-    - name: "Queens Larder"
+    - name: "Queen's Larder"
+      googleMapsLink: "https://maps.google.com/?q=Queen's+Larder,+1+Queen+Square,+London+WC1N+3AT"
+  note: "Full squad; 6pm beers at Queen’s Larder then Swiss Butter. Celebratory vibes for Big T’s new job (and Stella price commentary)."
   attendees: []
 
 - date: 2024-07-27
   primaryVenue:
-    name: "Black Cactus BBQ at Exale"
+    name: "Black Cactus BBQ (at Exale Brewing)"
+    googleMapsLink: "https://maps.google.com/?q=Exale+Brewing,+Blackhorse+Lane,+London+E17+5QJ"
   secondaryVenues:
     - name: "Renegade Urban Winery"
+      googleMapsLink: "https://maps.google.com/?q=Renegade+Urban+Winery,+7+Lockwood+Way,+London+E17+5QZ"
+  note: "Meat up on tour: wetlands stroll from Tottenham Hale, Renegade Urban Winery into Hackney breweries; Black Cactus ran out of food/ice but the crawl and chaos made it a top-tier night."
   attendees: []
 
 - date: 2024-09-11
   primaryVenue:
-    name: "Texas Joes"
+    name: "Texas Joe's Slow Smoked Meats"
   secondaryVenues:
     - name: "Betsy Trottwood"
+      googleMapsLink: "https://maps.google.com/?q=The+Betsy+Trottwood,+56+Farringdon+Rd,+London+EC1R+3BL"
     - name: "Horseshoe Inn"
+      googleMapsLink: "https://maps.google.com/?q=Horseshoe+Inn,+26+Melior+St,+London+SE1+3QP"
+  note: "BBQ benchmark from earlier hype; floated as the next hit after polls with ‘invite Ali?’ jokes. Pre-Guinness at Betsy Trottwood before regrouping at the Horseshoe then Texas Joes."
   attendees: []
 
 - date: 2025-02-20
   primaryVenue:
     name: "Blacklock (Soho)"
+    googleMapsLink: "https://maps.google.com/?q=Blacklock,+24+Great+Windmill+St,+London+W1D+7LG"
   secondaryVenues:
-    - name: "Queens Head"
+    - name: "Queen's Head (Soho)"
+  note: "7:15 table locked in; Rico bailed and Ali watched jealously. Soho was heaving so pre-beers bounced between the Devonshire plan and the Queen’s Head; Big T and MJ landed bang on 6 with Alex close behind."
   attendees: []
 
 - date: 2025-03-18
+  status: failed
   primaryVenue:
-    name: "Unknown"
-  secondaryVenues:
-    - name: "Unknown Pub"
-      googleMapsLink: "https://maps.app.goo.gl/RUmzZwAfztbJ31caA?g_st=com.google.maps.preview.copy"
+    name: "Carcass Club at Flat Iron"
+    googleMapsLink: "https://maps.google.com/?q=Flat+Iron,+The+Sidings,+Waterloo+Station,+London+SE1+7BH"
+  note: "Could not get in to Carcass Club at Flat Iron; pivoted to a nearby pub."
   attendees: []
 
 - date: 2025-07-17
   primaryVenue:
-    name: "Lord Nelson"
+    name: "The Lord Nelson (Southwark)"
+    googleMapsLink: "https://maps.google.com/?q=The+Lord+Nelson,+243+Union+St,+London+SE1+0LR"
   secondaryVenues:
-    - name: "Unknown Pub"
+    - name: "Molly Mc's"
       googleMapsLink: "https://maps.app.goo.gl/57qjjWK1ZtBvGiXa9?g_st=ipc"
   attendees: []
 
 - date: 2025-08-28
   primaryVenue:
     name: "Fowl"
+    googleMapsLink: "https://maps.google.com/?q=FOWL,+3+Norris+St,+London+SW1Y+4RJ"
   secondaryVenues:
     - name: "Queen's Head"
       googleMapsLink: "https://maps.app.goo.gl/66FVEPKjy4ZpdA9s7?g_st=ac"
@@ -83,14 +101,16 @@
   primaryVenue:
     name: "Burger and Beyond Soho"
   secondaryVenues:
-    - name: "Unknown Pub"
+    - name: "Coach & Horses (Greek St)"
       googleMapsLink: "https://maps.app.goo.gl/iZFJPdqzrjx4AW6XA?g_st=ipc"
+  note: "7:15 Burger & Beyond table; Ali ummed and ahhed but rocked up. Pre-pints from ~6 at the Soho pub with the good Guinness (map link) before rolling to dinner."
   attendees: []
 
 - date: 2025-12-03
   primaryVenue:
     name: "Guinea Grill"
+    googleMapsLink: "https://maps.google.com/?q=The+Guinea+Grill,+30+Bruton+Pl,+London+W1J+6NL"
   secondaryVenues:
-    - name: "Unknown Pub"
+    - name: "Shaston Arms"
       googleMapsLink: "https://maps.app.goo.gl/wVvXzxSv6cN6ueCs9?g_st=ipc"
   attendees: []

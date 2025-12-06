@@ -2,7 +2,7 @@
 import type { HTMLAttributes } from 'astro/types';
 
 interface Props extends HTMLAttributes<'a'> {
-	variant?: 'primary';
+	variant?: 'primary' | 'secondary';
 	className?: string;
 }
 
@@ -44,5 +44,22 @@ const {  variant = 'primary', className, ...rest } = Astro.props;
 	.button:active {
 		transform: translate(2px, 2px);
 		box-shadow: 2px 2px 0px var(--carbon-black);
+	}
+
+	.button.secondary {
+		background: transparent;
+		color: var(--stark-white);
+		border: 2px solid var(--stark-white);
+		box-shadow: 2px 2px 0px var(--carbon-black);
+	}
+
+	.button.secondary:hover {
+		transform: translate(-2px, -2px);
+		box-shadow: 4px 4px 0px var(--carbon-black);
+	}
+
+	.button.secondary:active {
+		transform: translate(2px, 2px);
+		box-shadow: 1px 1px 0px var(--carbon-black);
 	}
 </style>
