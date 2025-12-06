@@ -1,0 +1,16 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "tasks": {
+    "astro:build": {
+      "outputs": ["dist/**"],
+      "inputs": ["src/**", "public/**", "astro.config.*", "tsconfig.json"]
+    },
+    "astro:dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "astro:preview": {
+      "dependsOn": ["astro:build"]
+    }
+  }
+}
