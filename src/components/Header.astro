@@ -28,7 +28,7 @@ import hotDogImage from '../assets/hot-dog.jpg';
         src={hotDogImage}
         alt="Delicious hot dog"
         widths={[640, 750, 828, 1080, 1200, 1920, 2048, 3840]}
-        sizes="50vw"
+        sizes="(max-width: 768px) 100vw, 50vw"
         loading="eager"
       />
     </div>
@@ -140,12 +140,14 @@ import hotDogImage from '../assets/hot-dog.jpg';
   @media (max-width: 768px) {
     .hero-split {
       grid-template-columns: 1fr;
-    }
-    .hero-right {
-      display: none; /* On small screens, maybe just show the red part */
+      height: auto;
+      max-height: none;
     }
     .hero-left {
-        min-height: 60vh;
+        min-height: 50vh;
+    }
+    .hero-right {
+        height: 50vh;
     }
     .top-bar nav {
         display: none; /* Hide nav on mobile for simplicity for now */
