@@ -136,10 +136,3 @@
     name: "TBD Booking (Template)"
   note: "Template: date locked, booking confirmed. Replace venue + details when next slot is secured."
   attendees: []
-
-- date: 2026-03-20
-  status: planning
-  primaryVenue:
-    name: "TBD Planning Hold (Template)"
-  note: "Template: pencilled date, venue and booking to be confirmed."
-  attendees: []

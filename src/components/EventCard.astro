@@ -7,7 +7,7 @@ interface Venue {
   googleMapsLink?: string;
 }
 
-type EventStatus = 'completed' | 'failed' | 'scheduled' | 'planning';
+type EventStatus = 'completed' | 'failed' | 'scheduled';
 
 interface Props {
   eventNumber: number;
@@ -32,13 +32,11 @@ const statusLabels: Record<EventStatus, string> = {
   completed: 'Completed',
   failed: 'Failed',
   scheduled: 'Booked',
-  planning: 'Planning',
 };
 
 const statusMeta: Partial<Record<EventStatus, string>> = {
   failed: 'Plan changed on the day.',
   scheduled: 'Booking secured, details locked.',
-  planning: 'Date pencilled, booking in progress.',
 };
 
 const statusBadge = status !== 'completed' ? `status-badge--${status}` : '';
@@ -112,15 +110,6 @@ const eventToneClass = status !== 'completed' ? `event--${status}` : '';
     );
   }
 
-  .event--planning {
-    border-style: dashed;
-    background: linear-gradient(
-      120deg,
-      rgba(255, 255, 255, 0.08),
-      rgba(255, 255, 255, 0.02)
-    );
-  }
-
   .event--failed {
     border-color: var(--electric-red);
     background: linear-gradient(
@@ -168,12 +157,6 @@ const eventToneClass = status !== 'completed' ? `event--${status}` : '';
     background: var(--mustard-yellow);
     color: var(--carbon-black);
     box-shadow: 3px 3px 0px var(--carbon-black);
-  }
-
-  .status-badge--planning {
-    border: 2px dashed var(--stark-white);
-    color: var(--stark-white);
-    background: rgba(255, 255, 255, 0.04);
   }
 
   .meta {
