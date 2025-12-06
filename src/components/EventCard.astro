@@ -1,0 +1,59 @@
+---
+interface Props {
+  date: Date;
+  venue: string;
+  address: string;
+  googleMapsLink: string;
+  attendees: string[];
+}
+
+const { date, venue, address, googleMapsLink, attendees } = Astro.props;
+---
+
+<li class="event">
+  <h2>{venue}</h2>
+  <time datetime={date.toISOString()}>
+    {date.toLocaleDateString('en-GB', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    })}
+  </time>
+  <p class="address">{address}</p>
+  <a href={googleMapsLink} target="_blank" rel="noopener">View on Google Maps</a>
+  <div class="attendees">
+    <strong>Attendees:</strong>
+    <ul>
+      {attendees.map((name) => <li>{name}</li>)}
+    </ul>
+  </div>
+</li>
+
+<style>
+  .event {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1.5rem;
+  }
+
+  .event h2 {
+    margin: 0 0 0.5rem;
+  }
+
+  .event time {
+    color: #666;
+  }
+
+  .address {
+    margin: 0.5rem 0;
+  }
+
+  .attendees {
+    margin-top: 1rem;
+  }
+
+  .attendees ul {
+    margin: 0.5rem 0 0 1.5rem;
+  }
+</style>

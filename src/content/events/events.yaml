@@ -1,0 +1,17 @@
+- date: 2024-01-15
+  venue: The Local Pub
+  address: 123 Main Street, Sydney NSW 2000
+  googleMapsLink: https://maps.google.com/?q=123+Main+Street+Sydney+NSW+2000
+  attendees:
+    - James
+    - Sarah
+    - Mike
+
+- date: 2024-02-20
+  venue: The Beer Garden
+  address: 456 High Street, Melbourne VIC 3000
+  googleMapsLink: https://maps.google.com/?q=456+High+Street+Melbourne+VIC+3000
+  attendees:
+    - James
+    - Tom
+    - Lisa

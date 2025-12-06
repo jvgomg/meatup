@@ -1,0 +1,24 @@
+---
+import { getEntry } from 'astro:content';
+import EventCard from './EventCard.astro';
+
+const entry = await getEntry('events', 'events');
+if (!entry) throw new Error('Events not found');
+const events = entry.data.toSorted((a, b) => b.date.getTime() - a.date.getTime());
+---
+
+<ul class="events">
+  {events.map((event) => (
+    <EventCard {...event} />
+  ))}
+</ul>
+
+<style>
+  .events {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+</style>

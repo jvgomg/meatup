@@ -1,0 +1,23 @@
+---
+import Layout from '../layouts/Layout.astro';
+import EventList from '../components/EventList.astro';
+---
+
+<Layout>
+	<main>
+		<h1>Upcoming Events</h1>
+		<EventList />
+	</main>
+</Layout>
+
+<style>
+	main {
+		max-width: 800px;
+		margin: 0 auto;
+		padding: 2rem;
+	}
+
+	h1 {
+		margin-bottom: 2rem;
+	}
+</style>
