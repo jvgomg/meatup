@@ -1,4 +1,5 @@
 - date: 2023-10-10
+  status: completed
   primaryVenue:
     name: "Texas Joe's Slow Smoked Meats"
     googleMapsLink: "https://maps.app.goo.gl/omSPC5B5cXdBMfFz5?g_st=ic"
@@ -8,6 +9,7 @@
   attendees: []
 
 - date: 2023-11-23
+  status: completed
   primaryVenue:
     name: "Smokestak"
     googleMapsLink: "https://maps.app.goo.gl/Cfo4QGXioPPgefaF7"
@@ -15,6 +17,7 @@
   attendees: []
 
 - date: 2024-03-07
+  status: completed
   primaryVenue:
     name: "Quality Chop House"
     googleMapsLink: "https://maps.app.goo.gl/RjcY95tqBjngbTWH9?g_st=iw"
@@ -25,6 +28,7 @@
   attendees: []
 
 - date: 2024-05-09
+  status: completed
   primaryVenue:
     name: "The Oxford Market"
     googleMapsLink: "https://maps.google.com/?q=The+Oxford+Market,+11-13+Market+Place,+London+W1W+8AH"
@@ -32,6 +36,7 @@
   attendees: []
 
 - date: 2024-06-27
+  status: completed
   primaryVenue:
     name: "Swiss Butter"
     googleMapsLink: "https://maps.google.com/?q=Swiss+Butter,+114-118+Southampton+Row,+London+WC1B+4BL"
@@ -42,6 +47,7 @@
   attendees: []
 
 - date: 2024-07-27
+  status: completed
   primaryVenue:
     name: "Black Cactus BBQ (at Exale Brewing)"
     googleMapsLink: "https://maps.google.com/?q=Exale+Brewing,+Blackhorse+Lane,+London+E17+5QJ"
@@ -52,6 +58,7 @@
   attendees: []
 
 - date: 2024-09-11
+  status: completed
   primaryVenue:
     name: "Texas Joe's Slow Smoked Meats"
   secondaryVenues:
@@ -63,6 +70,7 @@
   attendees: []
 
 - date: 2025-02-20
+  status: completed
   primaryVenue:
     name: "Blacklock (Soho)"
     googleMapsLink: "https://maps.google.com/?q=Blacklock,+24+Great+Windmill+St,+London+W1D+7LG"
@@ -80,24 +88,29 @@
   attendees: []
 
 - date: 2025-07-17
+  status: completed
   primaryVenue:
     name: "The Lord Nelson (Southwark)"
     googleMapsLink: "https://maps.google.com/?q=The+Lord+Nelson,+243+Union+St,+London+SE1+0LR"
   secondaryVenues:
     - name: "Molly Mc's"
       googleMapsLink: "https://maps.app.goo.gl/57qjjWK1ZtBvGiXa9?g_st=ipc"
+  note: "Date pencilled; booking to be locked once numbers firm up."
   attendees: []
 
 - date: 2025-08-28
+  status: completed
   primaryVenue:
     name: "Fowl"
     googleMapsLink: "https://maps.google.com/?q=FOWL,+3+Norris+St,+London+SW1Y+4RJ"
   secondaryVenues:
     - name: "Queen's Head"
       googleMapsLink: "https://maps.app.goo.gl/66FVEPKjy4ZpdA9s7?g_st=ac"
+  note: "Late-summer Fowl run; waiting for booking window to open."
   attendees: []
 
 - date: 2025-10-09
+  status: completed
   primaryVenue:
     name: "Burger and Beyond Soho"
   secondaryVenues:
@@ -107,10 +120,26 @@
   attendees: []
 
 - date: 2025-12-03
+  status: completed
   primaryVenue:
     name: "Guinea Grill"
     googleMapsLink: "https://maps.google.com/?q=The+Guinea+Grill,+30+Bruton+Pl,+London+W1J+6NL"
   secondaryVenues:
     - name: "Shaston Arms"
       googleMapsLink: "https://maps.app.goo.gl/wVvXzxSv6cN6ueCs9?g_st=ipc"
+  note: "Festive steak night target; booking window not open yet."
+  attendees: []
+
+- date: 2026-01-15
+  status: scheduled
+  primaryVenue:
+    name: "TBD Booking (Template)"
+  note: "Template: date locked, booking confirmed. Replace venue + details when next slot is secured."
+  attendees: []
+
+- date: 2026-03-20
+  status: planning
+  primaryVenue:
+    name: "TBD Planning Hold (Template)"
+  note: "Template: pencilled date, venue and booking to be confirmed."
   attendees: []
