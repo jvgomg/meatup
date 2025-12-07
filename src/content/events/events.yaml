@@ -57,8 +57,8 @@
 - date: 2024-07-27
   status: completed
   primaryVenue:
-    name: "Black Cactus BBQ (at Exale Brewing)"
-    address: "Blackhorse Lane, London E17 5QJ"
+    name: "Black Cactus BBQ"
+    address: "Exale Brewing, Blackhorse Lane, London E17 5QJ"
     googleMapsLink: "https://maps.google.com/?q=Exale+Brewing,+Blackhorse+Lane,+London+E17+5QJ"
   secondaryVenues:
     - name: "Renegade Urban Winery"
@@ -86,11 +86,11 @@
 - date: 2025-02-20
   status: completed
   primaryVenue:
-    name: "Blacklock (Soho)"
-    address: "24 Great Windmill Street, London W1D 7LG"
+    name: "Blacklock"
+    address: "24 Great Windmill Street, Soho, London W1D 7LG"
     googleMapsLink: "https://maps.google.com/?q=Blacklock,+24+Great+Windmill+St,+London+W1D+7LG"
   secondaryVenues:
-    - name: "Queen's Head (Soho)"
+    - name: "Queen's Head"
       address: "15 Denman Street, Soho, London W1D 7HN"
   note: "7:15 table locked in; one person bailed and another watched jealously. Soho was heaving so pre-beers bounced between the Devonshire plan and the Queen’s Head; a pair landed bang on 6 with others close behind."
   attendees: []
@@ -107,8 +107,8 @@
 - date: 2025-07-17
   status: completed
   primaryVenue:
-    name: "The Lord Nelson (Southwark)"
-    address: "243 Union Street, London SE1 0LR"
+    name: "The Lord Nelson"
+    address: "243 Union Street, Southwark, London SE1 0LR"
     googleMapsLink: "https://maps.google.com/?q=The+Lord+Nelson,+243+Union+St,+London+SE1+0LR"
   secondaryVenues:
     - name: "Molly Mc's"
@@ -135,8 +135,9 @@
   primaryVenue:
     name: "Burger and Beyond Soho"
     address: "10 Old Compton Street, London W1D 4TF"
+    googleMapsLink: "https://maps.google.com/?q=Burger+and+Beyond,+10+Old+Compton+St,+London+W1D+4TF"
   secondaryVenues:
-    - name: "Coach & Horses (Greek St)"
+    - name: "Coach & Horses"
       address: "29 Greek Street, London W1D 5DH"
       googleMapsLink: "https://maps.app.goo.gl/iZFJPdqzrjx4AW6XA?g_st=ipc"
   note: "7:15 Burger & Beyond table; one member ummed and ahhed but rocked up. Pre-pints from ~6 at the Soho pub with the good Guinness (map link) before rolling to dinner."
