@@ -72,6 +72,7 @@
   primaryVenue:
     name: "Texas Joe's Slow Smoked Meats"
     address: "8-9 Snowsfields, London SE1 3SU"
+    googleMapsLink: "https://share.google/LiPXyz4sGBfIu1nTD"
   secondaryVenues:
     - name: "Betsy Trottwood"
       address: "56 Farringdon Road, London EC1R 3BL"
