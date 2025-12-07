@@ -133,8 +133,8 @@
 - date: 2025-10-09
   status: completed
   primaryVenue:
-    name: "Burger and Beyond Soho"
-    address: "10 Old Compton Street, London W1D 4TF"
+    name: "Burger and Beyond"
+    address: "10 Old Compton Street, Soho, London W1D 4TF"
     googleMapsLink: "https://maps.google.com/?q=Burger+and+Beyond,+10+Old+Compton+St,+London+W1D+4TF"
   secondaryVenues:
     - name: "Coach & Horses"
