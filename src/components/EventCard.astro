@@ -44,8 +44,35 @@ const statusMeta: Partial<Record<EventStatus, string>> = {
 
 const statusBadge = status !== "completed" ? `status-badge--${status}` : "";
 const eventToneClass = status !== "completed" ? `event--${status}` : "";
+const firstTimerSet = new Set(firstTimers);
+const eventNumberStr = eventNumber.toString();
+const attendeeColorMap: Record<string, { bg: string; fg: string }> = {
+  Atlas: { bg: "var(--mustard-yellow)", fg: "var(--carbon-black)" },
+  Morse: { bg: "rgba(224, 79, 95, 0.9)", fg: "var(--stark-white)" },
+  Titan: { bg: "rgba(255, 255, 255, 0.2)", fg: "var(--stark-white)" },
+  Ranger: { bg: "rgba(0, 0, 0, 0.8)", fg: "var(--mustard-yellow)" },
+  Aster: { bg: "rgba(255, 255, 255, 0.25)", fg: "var(--carbon-black)" },
+  Archer: { bg: "rgba(224, 79, 95, 0.65)", fg: "var(--carbon-black)" },
+  Blaze: { bg: "rgba(255, 205, 86, 0.25)", fg: "var(--carbon-black)" },
+  Moss: { bg: "rgba(0, 0, 0, 0.65)", fg: "var(--stark-white)" },
+  Grove: { bg: "rgba(255, 205, 86, 0.4)", fg: "var(--carbon-black)" },
+  Marlin: { bg: "rgba(224, 79, 95, 0.55)", fg: "var(--stark-white)" },
+};
 
-const leadingZeros = "0".repeat(Math.max(0, 3 - eventNumber.toString().length));
+const fallbackPalette = [
+  { bg: "rgba(255, 255, 255, 0.15)", fg: "var(--carbon-black)" },
+  { bg: "rgba(0, 0, 0, 0.7)", fg: "var(--stark-white)" },
+  { bg: "rgba(224, 79, 95, 0.5)", fg: "var(--stark-white)" },
+  { bg: "rgba(255, 205, 86, 0.35)", fg: "var(--carbon-black)" },
+];
+
+const getAttendeeColors = (name: string) => {
+  if (attendeeColorMap[name]) return attendeeColorMap[name];
+  const hash = [...name].reduce((acc, char) => acc + char.charCodeAt(0), 0);
+  return fallbackPalette[hash % fallbackPalette.length];
+};
+
+const leadingZeros = "0".repeat(Math.max(0, 3 - eventNumberStr.length));
 
 function formatDate(date: Date): string {
   const day = date.getDate();
@@ -59,7 +86,7 @@ function formatDate(date: Date): string {
 
 <li class:list={["event", eventToneClass]}>
   <div class="event-number">
-    <span class="leading-zeros">{leadingZeros}</span>{eventNumber}
+    <span class="leading-zeros">{leadingZeros}</span>{eventNumberStr}
   </div>
   <div class="details">
     <div class="event-heading">
@@ -143,6 +170,38 @@ function formatDate(date: Date): string {
         </ul>
       )
     }
+    {attendees.length > 0 && (
+      <div class="attendees">
+        <span class="attendees__label">Attendees</span>
+        <ul class="attendees__list">
+          {attendees.map((attendee) => {
+            const isFirst = firstTimerSet.has(attendee);
+            const initial = attendee.slice(0, 1).toUpperCase();
+            const colors = getAttendeeColors(attendee);
+            return (
+              <li
+                class:list={["attendee", isFirst && "attendee--first"]}
+                title={attendee}
+                style={{
+                  "--attendee-bg": colors.bg,
+                  "--attendee-fg": colors.fg,
+                }}
+              >
+                <span class="attendee__avatar">
+                  <span aria-hidden="true">{initial}</span>
+                  {isFirst && (
+                    <span class="attendee__new" aria-label="First meat up">
+                      🥩
+                    </span>
+                  )}
+                </span>
+                <span class="attendee__name">{attendee}</span>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    )}
   </div>
 </li>
 
