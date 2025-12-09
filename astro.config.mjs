@@ -10,4 +10,5 @@ export default defineConfig({
     imageService: true,
     devImageService: 'sharp',
   }),
+  site: 'https://meatup.fun',
 })

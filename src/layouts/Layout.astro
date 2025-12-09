@@ -2,6 +2,12 @@
 import '@fontsource-variable/oswald';
 import '@fontsource-variable/inter';
 import '../styles/global.css';
+
+const siteTitle = 'Meat Up';
+const tagline = 'We have the meats.';
+const ogImageUrl = Astro.site
+	? new URL('/social-share.jpg', Astro.site).toString()
+	: '/social-share.jpg';
 ---
 
 <!doctype html>
@@ -12,14 +18,21 @@ import '../styles/global.css';
 		<!-- TODO: create a favicon -->
 		<!-- <link rel="icon" type="image/svg+xml" href="/favicon.svg" /> -->
 		<meta name="generator" content={Astro.generator} />
-		<title>Meat Up</title>
+		<title>{siteTitle}</title>
 
-		<!-- TODO: add description meta -->
-		<meta name="description" content="" />
+		<meta name="description" content={tagline} />
 
-		<!-- TODO: Add Open Graph meta tags -->
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content={siteTitle} />
+		<meta property="og:description" content={tagline} />
+		<meta property="og:image" content={ogImageUrl} />
+		<meta property="og:image:alt" content="Delicious hot dog from Meat Up" />
+		<meta property="og:site_name" content={siteTitle} />
 
-		<!-- TODO: Add an Open Graph image -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={siteTitle} />
+		<meta name="twitter:description" content={tagline} />
+		<meta name="twitter:image" content={ogImageUrl} />
 	</head>
 	<body>
 		<slot />
