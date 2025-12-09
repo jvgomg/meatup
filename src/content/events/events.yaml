@@ -2,9 +2,11 @@
   status: completed
   primaryVenue:
     name: "Texas Joe's Slow Smoked Meats"
+    address: "8-9 Snowsfields, London SE1 3SU"
     googleMapsLink: "https://maps.app.goo.gl/omSPC5B5cXdBMfFz5?g_st=ic"
   secondaryVenues:
     - name: "Horseshoe Inn"
+      address: "26 Melior Street, Bermondsey, London SE1 3QP"
   note: "First meat up: 7:30 booking near the secret pool club, pre-beers at Horseshoe, then maybe N1 Bar if we weren’t flatlining."
   attendees:
     - Atlas
@@ -16,6 +18,7 @@
   status: completed
   primaryVenue:
     name: "Smokestak"
+    address: "35 Sclater Street, London E1 6LB"
     googleMapsLink: "https://maps.app.goo.gl/Cfo4QGXioPPgefaF7"
   note: "One regular was stuck in Jersey; 7/7:30 table, pre-pint nearby. Brisket was fine, smoke was biblical—clothes straight to the balcony/dry cleaner."
   attendees:
@@ -27,9 +30,11 @@
   status: completed
   primaryVenue:
     name: "Quality Chop House"
+    address: "92-94 Farringdon Road, London EC1R 3EA"
     googleMapsLink: "https://maps.app.goo.gl/RjcY95tqBjngbTWH9?g_st=iw"
   secondaryVenues:
     - name: "Clerkenwell Tavern"
+      address: "137-139 St John Street, London EC1V 4JP"
       googleMapsLink: "https://maps.google.com/?q=Clerkenwell+Tavern,+137-139+St+John+St,+London+EC1V+4JP"
   note: "Poll shuffle, booking secured; one member nearly bailed for an interview. Pre-Guinness from ~6 at Clerkenwell Tavern before dinner."
   attendees:
@@ -42,6 +47,7 @@
   status: completed
   primaryVenue:
     name: "The Oxford Market"
+    address: "11-13 Market Place, London W1W 8AH"
     googleMapsLink: "https://maps.google.com/?q=The+Oxford+Market,+11-13+Market+Place,+London+W1W+8AH"
   note: "Chill round with partners welcome; one regular was revising. Pub was heaving, lots of fridge-selling and ‘is it even open?’ banter."
   attendees:
@@ -56,9 +62,11 @@
   status: completed
   primaryVenue:
     name: "Swiss Butter"
+    address: "114-118 Southampton Row, London WC1B 4BL"
     googleMapsLink: "https://maps.google.com/?q=Swiss+Butter,+114-118+Southampton+Row,+London+WC1B+4BL"
   secondaryVenues:
     - name: "Queen's Larder"
+      address: "1 Queen Square, London WC1N 3AT"
       googleMapsLink: "https://maps.google.com/?q=Queen's+Larder,+1+Queen+Square,+London+WC1N+3AT"
   note: "Full squad; 6pm beers at Queen’s Larder then Swiss Butter. Celebratory vibes for a new job (and plenty of Stella price commentary)."
   attendees:
@@ -70,10 +78,12 @@
 - date: 2024-07-27
   status: completed
   primaryVenue:
-    name: "Black Cactus BBQ (at Exale Brewing)"
+    name: "Black Cactus BBQ"
+    address: "Exale Brewing, Blackhorse Lane, London E17 5QJ"
     googleMapsLink: "https://maps.google.com/?q=Exale+Brewing,+Blackhorse+Lane,+London+E17+5QJ"
   secondaryVenues:
     - name: "Renegade Urban Winery"
+      address: "7 Lockwood Way, London E17 5QZ"
       googleMapsLink: "https://maps.google.com/?q=Renegade+Urban+Winery,+7+Lockwood+Way,+London+E17+5QZ"
   note: "Meat up on tour: wetlands stroll from Tottenham Hale, Renegade Urban Winery into Hackney breweries; Black Cactus ran out of food/ice but the crawl and chaos made it a top-tier night."
   attendees:
@@ -87,10 +97,14 @@
   status: completed
   primaryVenue:
     name: "Texas Joe's Slow Smoked Meats"
+    address: "8-9 Snowsfields, London SE1 3SU"
+    googleMapsLink: "https://share.google/LiPXyz4sGBfIu1nTD"
   secondaryVenues:
     - name: "Betsy Trottwood"
+      address: "56 Farringdon Road, London EC1R 3BL"
       googleMapsLink: "https://maps.google.com/?q=The+Betsy+Trottwood,+56+Farringdon+Rd,+London+EC1R+3BL"
     - name: "Horseshoe Inn"
+      address: "26 Melior Street, London SE1 3QP"
       googleMapsLink: "https://maps.google.com/?q=Horseshoe+Inn,+26+Melior+St,+London+SE1+3QP"
   note: "BBQ benchmark from earlier hype; floated as the next hit after polls with ‘invite?’ jokes. Pre-Guinness at Betsy Trottwood before regrouping at the Horseshoe then Texas Joe's."
   attendees:
@@ -104,10 +118,12 @@
 - date: 2025-02-20
   status: completed
   primaryVenue:
-    name: "Blacklock (Soho)"
+    name: "Blacklock"
+    address: "24 Great Windmill Street, Soho, London W1D 7LG"
     googleMapsLink: "https://maps.google.com/?q=Blacklock,+24+Great+Windmill+St,+London+W1D+7LG"
   secondaryVenues:
-    - name: "Queen's Head (Soho)"
+    - name: "Queen's Head"
+      address: "15 Denman Street, Soho, London W1D 7HN"
   note: "7:15 table locked in; one person bailed and another watched jealously. Soho was heaving so pre-beers bounced between the Devonshire plan and the Queen’s Head; a pair landed bang on 6 with others close behind."
   attendees:
     - Atlas
@@ -118,6 +134,7 @@
   status: failed
   primaryVenue:
     name: "Carcass Club at Flat Iron"
+    address: "The Sidings, Waterloo Station, London SE1 7BH"
     googleMapsLink: "https://maps.google.com/?q=Flat+Iron,+The+Sidings,+Waterloo+Station,+London+SE1+7BH"
   note: "Could not get in to Carcass Club at Flat Iron; pivoted to a nearby pub."
   attendees:
@@ -129,10 +146,12 @@
 - date: 2025-07-17
   status: completed
   primaryVenue:
-    name: "The Lord Nelson (Southwark)"
+    name: "The Lord Nelson"
+    address: "243 Union Street, Southwark, London SE1 0LR"
     googleMapsLink: "https://maps.google.com/?q=The+Lord+Nelson,+243+Union+St,+London+SE1+0LR"
   secondaryVenues:
     - name: "Molly Mc's"
+      address: "96 Isabella Street, London SE1 8DD"
       googleMapsLink: "https://maps.app.goo.gl/57qjjWK1ZtBvGiXa9?g_st=ipc"
   note: "Date pencilled; booking to be locked once numbers firm up."
   attendees:
@@ -146,9 +165,11 @@
   status: completed
   primaryVenue:
     name: "Fowl"
+    address: "3 Norris Street, London SW1Y 4RJ"
     googleMapsLink: "https://maps.google.com/?q=FOWL,+3+Norris+St,+London+SW1Y+4RJ"
   secondaryVenues:
     - name: "Queen's Head"
+      address: "15 Denman Street, London W1D 7HN"
       googleMapsLink: "https://maps.app.goo.gl/66FVEPKjy4ZpdA9s7?g_st=ac"
   note: "Late-summer Fowl run; waiting for booking window to open."
   attendees:
@@ -160,9 +181,12 @@
 - date: 2025-10-09
   status: completed
   primaryVenue:
-    name: "Burger and Beyond Soho"
+    name: "Burger and Beyond"
+    address: "10 Old Compton Street, Soho, London W1D 4TF"
+    googleMapsLink: "https://maps.google.com/?q=Burger+and+Beyond,+10+Old+Compton+St,+London+W1D+4TF"
   secondaryVenues:
-    - name: "Coach & Horses (Greek St)"
+    - name: "Coach & Horses"
+      address: "29 Greek Street, London W1D 5DH"
       googleMapsLink: "https://maps.app.goo.gl/iZFJPdqzrjx4AW6XA?g_st=ipc"
   note: "7:15 Burger & Beyond table; one member ummed and ahhed but rocked up. Pre-pints from ~6 at the Soho pub with the good Guinness (map link) before rolling to dinner."
   attendees:
@@ -177,9 +201,11 @@
   status: completed
   primaryVenue:
     name: "Guinea Grill"
+    address: "30 Bruton Place, Mayfair, London W1J 6NL"
     googleMapsLink: "https://maps.google.com/?q=The+Guinea+Grill,+30+Bruton+Pl,+London+W1J+6NL"
   secondaryVenues:
     - name: "Shaston Arms"
+      address: "4-6 Ganton St, Carnaby, London W1F 7QN"
       googleMapsLink: "https://maps.app.goo.gl/wVvXzxSv6cN6ueCs9?g_st=ipc"
   note: "Festive steak night target; booking window not open yet."
   attendees:

@@ -80,11 +80,13 @@ const pastEvents = eventsDescending.filter((event) => !upcomingStatuses.has(even
   .event-sections {
     display: grid;
     gap: var(--space-xl);
+    max-width: 48rem;
+    margin: 0 auto;
   }
 
   .events-group {
     display: grid;
-    gap: var(--space-m);
+    gap: var(--space-s);
   }
 
   .events-group__header {
@@ -104,6 +106,6 @@ const pastEvents = eventsDescending.filter((event) => !upcomingStatuses.has(even
     padding: 0;
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: var(--space-2xl);
   }
 </style>

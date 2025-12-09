@@ -1,5 +1,5 @@
 ---
-import LinkButton from './LinkButton.astro';
+import LinkButton from "./LinkButton.astro";
 
 interface Venue {
   name: string;
@@ -7,7 +7,7 @@ interface Venue {
   googleMapsLink?: string;
 }
 
-type EventStatus = 'completed' | 'failed' | 'scheduled';
+type EventStatus = "completed" | "failed" | "scheduled";
 
 interface Props {
   eventNumber: number;
@@ -25,177 +25,165 @@ const {
   date,
   primaryVenue,
   secondaryVenues,
-  status = 'scheduled',
+  status = "scheduled",
   note,
   attendees,
   firstTimers = [],
 } = Astro.props;
 
 const statusLabels: Record<EventStatus, string> = {
-  completed: 'Completed',
-  failed: 'Failed',
-  scheduled: 'Booked',
+  completed: "Completed",
+  failed: "Failed",
+  scheduled: "Booked",
 };
 
 const statusMeta: Partial<Record<EventStatus, string>> = {
-  failed: 'Plan changed on the day.',
-  scheduled: 'Booking secured, details locked.',
+  failed: "Plan changed on the day.",
+  scheduled: "Booking secured, details locked.",
 };
 
-const statusBadge = status !== 'completed' ? `status-badge--${status}` : '';
-const eventToneClass = status !== 'completed' ? `event--${status}` : '';
-const firstTimerSet = new Set(firstTimers);
+const statusBadge = status !== "completed" ? `status-badge--${status}` : "";
+const eventToneClass = status !== "completed" ? `event--${status}` : "";
 
-const attendeeColorMap: Record<string, { bg: string; fg: string }> = {
-  Atlas: { bg: 'var(--mustard-yellow)', fg: 'var(--carbon-black)' },
-  Morse: { bg: 'rgba(224, 79, 95, 0.9)', fg: 'var(--stark-white)' },
-  Titan: { bg: 'rgba(255, 255, 255, 0.2)', fg: 'var(--stark-white)' },
-  Ranger: { bg: 'rgba(0, 0, 0, 0.8)', fg: 'var(--mustard-yellow)' },
-  Aster: { bg: 'rgba(255, 255, 255, 0.25)', fg: 'var(--carbon-black)' },
-  Archer: { bg: 'rgba(224, 79, 95, 0.65)', fg: 'var(--carbon-black)' },
-  Blaze: { bg: 'rgba(255, 205, 86, 0.25)', fg: 'var(--carbon-black)' },
-  Moss: { bg: 'rgba(0, 0, 0, 0.65)', fg: 'var(--stark-white)' },
-  Grove: { bg: 'rgba(255, 205, 86, 0.4)', fg: 'var(--carbon-black)' },
-  Marlin: { bg: 'rgba(224, 79, 95, 0.55)', fg: 'var(--stark-white)' },
-};
+const leadingZeros = "0".repeat(Math.max(0, 3 - eventNumber.toString().length));
 
-const fallbackPalette = [
-  { bg: 'rgba(255, 255, 255, 0.15)', fg: 'var(--carbon-black)' },
-  { bg: 'rgba(0, 0, 0, 0.7)', fg: 'var(--stark-white)' },
-  { bg: 'rgba(224, 79, 95, 0.5)', fg: 'var(--stark-white)' },
-  { bg: 'rgba(255, 205, 86, 0.35)', fg: 'var(--carbon-black)' },
-];
-
-const getAttendeeColors = (name: string) => {
-  if (attendeeColorMap[name]) return attendeeColorMap[name];
-  const hash = [...name].reduce((acc, char) => acc + char.charCodeAt(0), 0);
-  return fallbackPalette[hash % fallbackPalette.length];
-};
+function formatDate(date: Date): string {
+  const day = date.getDate();
+  const month = date
+    .toLocaleDateString("en-GB", { month: "short" })
+    .toUpperCase();
+  const year = date.getFullYear().toString().slice(-2);
+  return `${day} ${month} ${year}`;
+}
 ---
 
-<li class:list={['event', eventToneClass]}>
-  <div class="event-number">{eventNumber.toString().padStart(3, '0')}</div>
+<li class:list={["event", eventToneClass]}>
+  <div class="event-number">
+    <span class="leading-zeros">{leadingZeros}</span>{eventNumber}
+  </div>
   <div class="details">
     <div class="event-heading">
       <h2>{primaryVenue.name}</h2>
-      {status !== 'completed' && (
-        <span class:list={['status-badge', statusBadge]}>{statusLabels[status]}</span>
-      )}
-    </div>
-    <div class="meta">
-      <time datetime={date.toISOString()}>
-        {date.toLocaleDateString('en-GB', {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric'
-        })}
-      </time>
-      {statusMeta[status] && <span class="status-copy">{statusMeta[status]}</span>}
-    </div>
-    {primaryVenue.googleMapsLink && (
-      <div class="actions">
-        <LinkButton href={primaryVenue.googleMapsLink} target="_blank" rel="noopener nofollow">Open in Maps</LinkButton>
+      <div>
+        <time datetime={date.toISOString()}>
+          {formatDate(date)}
+        </time>
       </div>
-    )}
-    {note && (
-      <div class={`note ${status === 'failed' ? 'note--failed' : ''}`}>
-        {note}
-      </div>
-    )}
-    {secondaryVenues && secondaryVenues.length > 0 && (
-      <ul class="secondary-venues">
-        {secondaryVenues.map((venue) => (
-          <li>
-            <span>{venue.name}</span>
-            {venue.googleMapsLink && (
-              <a href={venue.googleMapsLink} target="_blank" rel="noopener nofollow">Open in Maps</a>
+
+      {
+        primaryVenue.address && (
+          <div class="primary-venue-info">
+            {primaryVenue.address && (
+              <address class="primary-venue-address">
+                {primaryVenue.address}
+              </address>
             )}
-          </li>
-        ))}
-      </ul>
-    )}
-    {attendees.length > 0 && (
-      <div class="attendees">
-        <span class="attendees__label">Attendees</span>
-        <ul class="attendees__list">
-          {attendees.map((attendee) => {
-            const isFirst = firstTimerSet.has(attendee);
-            const initial = attendee.slice(0, 1).toUpperCase();
-            const colors = getAttendeeColors(attendee);
-            return (
-              <li
-                class:list={['attendee', isFirst && 'attendee--first']}
-                title={attendee}
-                style={{
-                  '--attendee-bg': colors.bg,
-                  '--attendee-fg': colors.fg,
-                }}
+
+            {primaryVenue.googleMapsLink && (
+              <a
+                href={primaryVenue.googleMapsLink}
+                target="_blank"
+                rel="noopener nofollow"
               >
-                <span class="attendee__avatar">
-                  <span aria-hidden="true">{initial}</span>
-                  {isFirst && (
-                    <span class="attendee__new" aria-label="First meat up">
-                      🥩
-                    </span>
-                  )}
-                </span>
-                <span class="attendee__name">{attendee}</span>
-              </li>
-            );
-          })}
+                Open in Maps
+              </a>
+            )}
+          </div>
+        )
+      }
+    </div>
+
+    {
+      status !== "completed" && (
+        <div class="meta">
+          <span class:list={["status-badge", statusBadge]}>
+            {statusLabels[status]}
+          </span>
+          {statusMeta[status] && (
+            <div>
+              <span class="status-copy">{statusMeta[status]}</span>
+            </div>
+          )}
+        </div>
+      )
+    }
+
+    {
+      note && (
+        <div class={`note ${status === "failed" ? "note--failed" : ""}`}>
+          {note}
+        </div>
+      )
+    }
+    {
+      secondaryVenues && secondaryVenues.length > 0 && (
+        <ul class="secondary-venues">
+          {secondaryVenues.map((venue) => (
+            <li>
+              <div class="secondary-venue-info">
+                <span class="secondary-venue-name">{venue.name}</span>
+                {venue.address && (
+                  <address class="secondary-venue-address">
+                    {venue.address}
+                  </address>
+                )}
+
+                {venue.googleMapsLink && (
+                  <a
+                    href={venue.googleMapsLink}
+                    target="_blank"
+                    rel="noopener nofollow"
+                  >
+                    Open in Maps
+                  </a>
+                )}
+              </div>
+            </li>
+          ))}
         </ul>
-      </div>
-    )}
+      )
+    }
   </div>
 </li>
 
 <style>
   .event {
-    border: 2px solid var(--stark-white);
-    padding: var(--space-l);
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: var(--space-l);
-    background: linear-gradient(
-      120deg,
-      rgba(255, 255, 255, 0.02),
-      rgba(255, 255, 255, 0.005)
-    );
-  }
-
-  .event--scheduled {
-    border-color: var(--mustard-yellow);
-    background: linear-gradient(
-      120deg,
-      rgba(255, 205, 86, 0.12),
-      rgba(255, 205, 86, 0.04)
-    );
-  }
-
-  .event--failed {
-    border-color: var(--electric-red);
-    background: linear-gradient(
-      120deg,
-      rgba(224, 79, 95, 0.08),
-      rgba(224, 79, 95, 0.02)
-    );
   }
 
   .event-number {
-    font-family: var(--font-display);
-    font-size: var(--step-5);
+    font-family: var(--font-body);
+    font-size: calc(var(--text-section) * 1.15);
+    font-variant-numeric: tabular-nums;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    line-height: 1;
     color: var(--mustard-yellow);
+  }
+
+  .leading-zeros {
+    color: rgba(255, 255, 255, 0.075);
   }
 
   .event-heading {
     display: flex;
-    align-items: center;
-    gap: var(--space-s);
+    flex-direction: column;
+    gap: var(--space-2xs);
     flex-wrap: wrap;
+  }
+
+  .details {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-m);
   }
 
   .details h2 {
     font-size: var(--text-section);
+    line-height: 1;
+    text-wrap: balance;
   }
 
   .status-badge {
@@ -225,7 +213,6 @@ const getAttendeeColors = (name: string) => {
     display: flex;
     align-items: center;
     gap: var(--space-s);
-    margin: var(--space-2xs) 0 var(--space-xs);
     flex-wrap: wrap;
   }
 
@@ -239,41 +226,68 @@ const getAttendeeColors = (name: string) => {
     opacity: 0.7;
   }
 
-  .actions {
+  .primary-venue-info {
     display: flex;
-    align-items: center;
-    gap: var(--space-s);
-    margin: var(--space-s) 0;
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: var(--space-3xs);
+    opacity: 0.7;
+    font-size: var(--step--1);
+  }
+
+  .primary-venue-address {
+    font-style: normal;
+    opacity: 0.8;
+  }
+
+  .primary-venue-info a {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    text-decoration-color: rgba(255, 255, 255, 0.4);
   }
 
   .secondary-venues {
     list-style: none;
     padding: 0;
-    margin: var(--space-s) 0 0;
     opacity: 0.7;
     font-size: var(--step--1);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-s);
   }
 
   .secondary-venues li {
     display: flex;
-    align-items: center;
-    gap: var(--space-2xs);
-    margin: var(--space-3xs) 0;
+    flex-direction: column;
+  }
+
+  .secondary-venue-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3xs);
+  }
+
+  .secondary-venue-name {
+    font-weight: 500;
+  }
+
+  .secondary-venue-address {
+    font-style: normal;
+    opacity: 0.8;
   }
 
   .secondary-venues a {
     text-decoration: underline;
+    text-underline-offset: 0.2em;
+    text-decoration-color: rgba(255, 255, 255, 0.4);
   }
 
   .note {
-    margin: var(--space-s) 0 0;
-    padding: var(--space-s);
+    padding: var(--space-xs-s);
     background: rgba(255, 255, 255, 0.04);
-    border: 2px solid var(--stark-white);
+    border: 1px solid rgba(255, 255, 255, 0.4);
     box-shadow: 3px 3px 0px var(--carbon-black);
     font-size: var(--text-ui);
-    line-height: 1.4;
+    line-height: 1.6;
   }
 
   .note--failed {
