@@ -7,6 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `pnpm dev` - Start development server (uses Turbo)
 - `pnpm build` - Build for production (uses Turbo)
 - `pnpm preview` - Preview production build (uses Turbo)
+- `pnpm typecheck` - Run TypeScript type checking via Astro
 
 ## Tech Stack
 

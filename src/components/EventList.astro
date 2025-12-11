@@ -97,10 +97,6 @@ const failedCount = pastEvents.filter((event) => event.status === 'failed').leng
 const scheduledCount = upcomingEvents.length;
 
 const lastHeldEvent = pastEvents[0];
-const daysSinceLast =
-  lastHeldEvent && lastHeldEvent.date
-    ? Math.floor((Date.now() - lastHeldEvent.date.getTime()) / (1000 * 60 * 60 * 24))
-    : null;
 
 const nextEvent = upcomingEvents[0];
 
@@ -192,10 +188,11 @@ const formatNameList = (names: string[]) =>
         <p class="summary__value">
           {lastHeldEvent ? formatSummaryDate(lastHeldEvent.date) : '—'}
         </p>
-        <p class="summary__meta">
-          {lastHeldEvent && typeof daysSinceLast === 'number'
-            ? `${daysSinceLast} days ago`
-            : 'Waiting for the first one'}
+        <p
+          class="summary__meta"
+          data-relative-date={lastHeldEvent?.date?.toISOString()}
+        >
+          {lastHeldEvent ? 'Calculating...' : 'Waiting for the first one'}
         </p>
       </div>
     </div>
@@ -229,13 +226,22 @@ const formatNameList = (names: string[]) =>
 </section>
 
 <script>
+  // Calculate relative dates client-side so they're always accurate
+  document.querySelectorAll('[data-relative-date]').forEach((el) => {
+    const dateStr = el.getAttribute('data-relative-date');
+    if (!dateStr) return;
+    const date = new Date(dateStr);
+    const days = Math.floor((Date.now() - date.getTime()) / (1000 * 60 * 60 * 24));
+    el.textContent = `${days} day${days === 1 ? '' : 's'} ago`;
+  });
+
   const summary = document.querySelector('.summary');
 
   if (summary) {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const statValues = summary.querySelectorAll('[data-count-target]');
 
-    const animateValue = (element, index) => {
+    const animateValue = (element: Element, index: number) => {
       const target = Number(element.getAttribute('data-count-target') ?? '0');
       if (!Number.isFinite(target)) return;
 
@@ -243,7 +249,7 @@ const formatNameList = (names: string[]) =>
       const duration = 1300 + index * 120;
       const start = performance.now();
 
-      const tick = (now) => {
+      const tick = (now: number) => {
         const progress = Math.min((now - start) / duration, 1);
         const eased = 1 - Math.pow(1 - progress, 4);
         const value = target * eased;
