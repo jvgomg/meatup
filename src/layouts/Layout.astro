@@ -3,6 +3,9 @@ import '@fontsource-variable/oswald';
 import '@fontsource-variable/inter';
 import '../styles/global.css';
 
+import oswaldFontUrl from '@fontsource-variable/oswald/files/oswald-latin-wght-normal.woff2?url';
+import interFontUrl from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url';
+
 const siteTitle = 'Meat Up';
 const tagline = 'We have the meats.';
 const ogImageUrl = Astro.site
@@ -15,6 +18,8 @@ const ogImageUrl = Astro.site
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
+		<link rel="preload" href={oswaldFontUrl} as="font" type="font/woff2" crossorigin />
+		<link rel="preload" href={interFontUrl} as="font" type="font/woff2" crossorigin />
 		<!-- TODO: create a favicon -->
 		<!-- <link rel="icon" type="image/svg+xml" href="/favicon.svg" /> -->
 		<meta name="generator" content={Astro.generator} />
