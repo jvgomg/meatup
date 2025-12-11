@@ -11,8 +11,8 @@
   attendees:
     - Alex T
     - Martin J
-    - Thorsten
-    - Rico
+    - Thorsten K
+    - Rico A
 
 - date: 2023-11-23
   status: completed
@@ -24,7 +24,7 @@
   attendees:
     - Alex T
     - Martin J
-    - Thorsten
+    - Thorsten K
 
 - date: 2024-03-07
   status: completed
@@ -40,8 +40,8 @@
   attendees:
     - Alex T
     - Martin J
-    - Thorsten
-    - Rico
+    - Thorsten K
+    - Rico A
 
 - date: 2024-05-09
   status: completed
@@ -53,8 +53,8 @@
   attendees:
     - Alex T
     - Martin J
-    - Thorsten
-    - Ali
+    - Thorsten K
+    - Ali A
 
 - date: 2024-06-27
   status: completed
@@ -70,8 +70,8 @@
   attendees:
     - Alex T
     - Martin J
-    - Thorsten
-    - Rico
+    - Thorsten K
+    - Rico A
 
 - date: 2024-07-27
   status: completed
@@ -87,8 +87,8 @@
   attendees:
     - Alex T
     - Martin J
-    - Thorsten
-    - Rico
+    - Thorsten K
+    - Rico A
     - Matt R
     - James G
 
@@ -109,9 +109,9 @@
   attendees:
     - Alex T
     - Martin J
-    - Thorsten
-    - Rico
-    - Ali
+    - Thorsten K
+    - Rico A
+    - Ali A
     - James G
 
 - date: 2025-02-20
@@ -127,7 +127,7 @@
   attendees:
     - Alex T
     - Martin J
-    - Thorsten
+    - Thorsten K
 
 - date: 2025-03-18
   status: failed
@@ -139,7 +139,7 @@
   attendees:
     - Alex T
     - Martin J
-    - Rico
+    - Rico A
     - Matt R
 
 - date: 2025-07-17
@@ -156,7 +156,7 @@
   attendees:
     - Alex T
     - Martin J
-    - Rico
+    - Rico A
     - Matt R
     - James G
     - James M
@@ -174,7 +174,7 @@
   note: "Late-summer Fowl run; waiting for booking window to open."
   attendees:
     - Alex T
-    - Thorsten
+    - Thorsten K
     - James G
 
 - date: 2025-10-09
@@ -191,9 +191,9 @@
   attendees:
     - Alex T
     - Martin J
-    - Thorsten
-    - Rico
-    - Ali
+    - Thorsten K
+    - Rico A
+    - Ali A
     - James M
 
 - date: 2025-12-03
@@ -210,7 +210,7 @@
   attendees:
     - Alex T
     - Martin J
-    - Rico
+    - Rico A
     - James M
     - James G
     - Matt R
