@@ -37,9 +37,8 @@ const pastAttendeeTotal = pastEvents.reduce(
   (sum, event) => sum + (event.attendees?.length ?? 0),
   0,
 );
-const averageAttendance = pastEvents.length
-  ? (pastAttendeeTotal / pastEvents.length).toFixed(1)
-  : '0.0';
+const averageAttendanceValue = pastEvents.length ? pastAttendeeTotal / pastEvents.length : 0;
+const averageAttendanceDisplay = averageAttendanceValue.toFixed(1);
 
 const venueCounts = new Map<string, number>();
 for (const event of normalizedEvents) {
@@ -90,28 +89,52 @@ function formatSummaryDate(date?: Date) {
     <div class="summary__grid">
       <div class="summary__card">
         <p class="summary__label">Total meatings</p>
-        <p class="summary__value">{totalEvents}</p>
+        <p
+          class="summary__value"
+          data-count-target={totalEvents}
+          data-count-decimals="0"
+        >
+          {totalEvents}
+        </p>
         <p class="summary__meta">
           {completedCount} completed · {failedCount} failed
         </p>
       </div>
       <div class="summary__card">
         <p class="summary__label">Upcoming</p>
-        <p class="summary__value">{scheduledCount}</p>
+        <p
+          class="summary__value"
+          data-count-target={scheduledCount}
+          data-count-decimals="0"
+        >
+          {scheduledCount}
+        </p>
         <p class="summary__meta">
           {nextEvent ? `Next: ${formatSummaryDate(nextEvent.date)}` : 'No bookings yet'}
         </p>
       </div>
       <div class="summary__card">
         <p class="summary__label">Attendance (avg)</p>
-        <p class="summary__value">{averageAttendance}</p>
+        <p
+          class="summary__value"
+          data-count-target={averageAttendanceValue}
+          data-count-decimals="1"
+        >
+          {averageAttendanceDisplay}
+        </p>
         <p class="summary__meta">
           Total {totalAttendees} · {uniqueAttendees.size} unique
         </p>
       </div>
       <div class="summary__card">
         <p class="summary__label">Venues</p>
-        <p class="summary__value">{uniqueVenues}</p>
+        <p
+          class="summary__value"
+          data-count-target={uniqueVenues}
+          data-count-decimals="0"
+        >
+          {uniqueVenues}
+        </p>
         <p class="summary__meta">
           {topVenue ? `Top: ${topVenue}` : 'No venues yet'}
         </p>
@@ -156,6 +179,56 @@ function formatSummaryDate(date?: Date) {
     </div>
   )}
 </section>
+
+<script>
+  const summary = document.querySelector('.summary');
+
+  if (summary) {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const statValues = summary.querySelectorAll('[data-count-target]');
+
+    const animateValue = (element, index) => {
+      const target = Number(element.getAttribute('data-count-target') ?? '0');
+      if (!Number.isFinite(target)) return;
+
+      const decimals = Number(element.getAttribute('data-count-decimals') ?? '0');
+      const duration = 1300 + index * 120;
+      const start = performance.now();
+
+      const tick = (now) => {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 4);
+        const value = target * eased;
+        element.textContent = value.toFixed(decimals);
+        if (progress < 1) requestAnimationFrame(tick);
+      };
+
+      element.textContent = (0).toFixed(decimals);
+      requestAnimationFrame(tick);
+    };
+
+    const revealStats = () => {
+      summary.classList.add('summary--visible');
+      statValues.forEach((element, index) => animateValue(element, index));
+    };
+
+    if (!prefersReducedMotion) {
+      summary.classList.add('summary--animate-ready');
+      const observer = new IntersectionObserver(
+        (entries, obs) => {
+          const hasIntersected = entries.some((entry) => entry.isIntersecting);
+          if (hasIntersected) {
+            revealStats();
+            obs.disconnect();
+          }
+        },
+        { threshold: 0.45 },
+      );
+
+      observer.observe(summary);
+    }
+  }
+</script>
 
 <style>
   .event-sections {
@@ -207,6 +280,17 @@ function formatSummaryDate(date?: Date) {
     box-shadow: 2px 2px 0 var(--carbon-black);
     position: relative;
     overflow: hidden;
+    transition: transform 360ms ease, opacity 360ms ease, box-shadow 220ms ease;
+  }
+
+  .summary--animate-ready .summary__card {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  .summary--visible .summary__card {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   .summary__card::after {
@@ -223,6 +307,26 @@ function formatSummaryDate(date?: Date) {
 
   .summary__card--wide {
     grid-column: span 2;
+  }
+
+  .summary--visible .summary__card:nth-child(1) {
+    transition-delay: 40ms;
+  }
+
+  .summary--visible .summary__card:nth-child(2) {
+    transition-delay: 80ms;
+  }
+
+  .summary--visible .summary__card:nth-child(3) {
+    transition-delay: 120ms;
+  }
+
+  .summary--visible .summary__card:nth-child(4) {
+    transition-delay: 160ms;
+  }
+
+  .summary--visible .summary__card:nth-child(5) {
+    transition-delay: 200ms;
   }
 
   @media (max-width: 600px) {
