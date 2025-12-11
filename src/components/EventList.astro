@@ -211,6 +211,20 @@ const formatNameList = (names: string[]) =>
     </div>
   )}
 
+  {upcomingEvents.length === 0 && (
+    <div class="events-group events-group--empty">
+      <header class="events-group__header">
+        <p class="eyebrow">Upcoming meatings</p>
+        <p class="empty__title">None on the books</p>
+      </header>
+      <div class="empty__card">
+        <p class="empty__copy">
+          Calendar is bare. Someone pick a date before we end up “meeting” at the closest Subway.
+        </p>
+      </div>
+    </div>
+  )}
+
   {pastEvents.length > 0 && (
     <div class="events-group">
       <header class="events-group__header">
@@ -433,6 +447,33 @@ const formatNameList = (names: string[]) =>
   .events-group__header {
     display: grid;
     gap: var(--space-3xs);
+  }
+
+  .events-group--empty {
+    border: 1px dashed rgba(255, 255, 255, 0.4);
+    padding: var(--space-m);
+    border-radius: var(--radius, 0.75rem);
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  .empty__title {
+    margin: 0;
+    font-size: var(--text-section);
+    font-weight: 700;
+  }
+
+  .empty__card {
+    margin-top: var(--space-2xs);
+    padding: var(--space-s);
+    border-radius: var(--radius, 0.5rem);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.04);
+    box-shadow: 2px 2px 0 var(--carbon-black);
+  }
+
+  .empty__copy {
+    margin: 0;
+    line-height: 1.5;
   }
 
   .eyebrow {
