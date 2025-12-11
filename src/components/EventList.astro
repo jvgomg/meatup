@@ -31,11 +31,14 @@ const totalAttendees = normalizedEvents.reduce(
   (sum, event) => sum + (event.attendees?.length ?? 0),
   0,
 );
-const uniqueAttendees = new Set(
-  normalizedEvents.flatMap((event) => event.attendees ?? []),
+const uniqueAttendees = new Set(normalizedEvents.flatMap((event) => event.attendees ?? []));
+
+const pastAttendeeTotal = pastEvents.reduce(
+  (sum, event) => sum + (event.attendees?.length ?? 0),
+  0,
 );
-const averageAttendance = totalEvents
-  ? (totalAttendees / totalEvents).toFixed(1)
+const averageAttendance = pastEvents.length
+  ? (pastAttendeeTotal / pastEvents.length).toFixed(1)
   : '0.0';
 
 const venueCounts = new Map<string, number>();
@@ -100,10 +103,10 @@ function formatSummaryDate(date?: Date) {
         </p>
       </div>
       <div class="summary__card">
-        <p class="summary__label">Attendance</p>
-        <p class="summary__value">{totalAttendees}</p>
+        <p class="summary__label">Attendance (avg)</p>
+        <p class="summary__value">{averageAttendance}</p>
         <p class="summary__meta">
-          {uniqueAttendees.size} unique · avg {averageAttendance}
+          Total {totalAttendees} · {uniqueAttendees.size} unique
         </p>
       </div>
       <div class="summary__card">
