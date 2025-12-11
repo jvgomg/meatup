@@ -100,10 +100,6 @@ const scheduledCount = normalizedEvents.filter((event) => event.status === 'sche
 const failedCount = normalizedEvents.filter((event) => event.status === 'failed').length;
 
 const lastHeldEvent = pastEvents[0];
-const daysSinceLast =
-  lastHeldEvent && lastHeldEvent.date
-    ? Math.floor((Date.now() - lastHeldEvent.date.getTime()) / (1000 * 60 * 60 * 24))
-    : null;
 
 const nextEvent = upcomingEvents[0];
 
@@ -195,10 +191,11 @@ const formatNameList = (names: string[]) =>
         <p class="summary__value">
           {lastHeldEvent ? formatSummaryDate(lastHeldEvent.date) : '—'}
         </p>
-        <p class="summary__meta">
-          {lastHeldEvent && typeof daysSinceLast === 'number'
-            ? `${daysSinceLast} days ago`
-            : 'Waiting for the first one'}
+        <p
+          class="summary__meta"
+          data-relative-date={lastHeldEvent?.date?.toISOString()}
+        >
+          {lastHeldEvent ? 'Calculating...' : 'Waiting for the first one'}
         </p>
       </div>
     </div>
@@ -232,6 +229,15 @@ const formatNameList = (names: string[]) =>
 </section>
 
 <script>
+  // Calculate relative dates client-side so they're always accurate
+  document.querySelectorAll('[data-relative-date]').forEach((el) => {
+    const dateStr = el.getAttribute('data-relative-date');
+    if (!dateStr) return;
+    const date = new Date(dateStr);
+    const days = Math.floor((Date.now() - date.getTime()) / (1000 * 60 * 60 * 24));
+    el.textContent = `${days} day${days === 1 ? '' : 's'} ago`;
+  });
+
   const summary = document.querySelector('.summary');
 
   if (summary) {
