@@ -141,58 +141,63 @@ function formatDate(date: Date): string {
     } -->
     {
       secondaryVenues && secondaryVenues.length > 0 && (
-        <ul class="secondary-venues">
-          {secondaryVenues.map((venue) => (
-            <li>
-              <div class="secondary-venue-info">
-                <span class="secondary-venue-name">{venue.name}</span>
-                {venue.address && (
-                  <address class="secondary-venue-address">
-                    {venue.address}
-                  </address>
-                )}
+        <div class="attendees">
+          <span class="attendees__label">Appetisers</span>
+          <ul class="secondary-venues">
+            {secondaryVenues.map((venue) => (
+              <li>
+                <div class="secondary-venue-info">
+                  <span class="secondary-venue-name">{venue.name}</span>
+                  {venue.address && (
+                    <address class="secondary-venue-address">
+                      {venue.address}
+                    </address>
+                  )}
 
-                {venue.googleMapsLink && (
-                  <a
-                    href={venue.googleMapsLink}
-                    target="_blank"
-                    rel="noopener nofollow"
-                  >
-                    Open in Maps
-                  </a>
-                )}
-              </div>
-            </li>
-          ))}
-        </ul>
+                  {venue.googleMapsLink && (
+                    <a
+                      href={venue.googleMapsLink}
+                      target="_blank"
+                      rel="noopener nofollow"
+                    >
+                      Open in Maps
+                    </a>
+                  )}
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
       )
     }
-    {attendees.length > 0 && (
-      <div class="attendees">
-        <span class="attendees__label">Attendees</span>
-        <ul class="attendees__list">
-          {attendees.map((attendee) => {
-            const initial = attendee.slice(0, 1).toUpperCase();
-            const colors = getAttendeeColors(attendee);
-            return (
-              <li
-                class="attendee"
-                title={attendee}
-                style={{
-                  "--attendee-bg": colors.bg,
-                  "--attendee-fg": colors.fg,
-                }}
-              >
-                <span class="attendee__avatar">
-                  <span aria-hidden="true">{initial}</span>
-                </span>
-                <span class="attendee__name">{attendee}</span>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-    )}
+    {
+      attendees.length > 0 && (
+        <div class="attendees">
+          <span class="attendees__label">Attendees</span>
+          <ul class="attendees__list">
+            {attendees.map((attendee) => {
+              const initial = attendee.slice(0, 1).toUpperCase();
+              const colors = getAttendeeColors(attendee);
+              return (
+                <li
+                  class="attendee"
+                  title={attendee}
+                  style={{
+                    "--attendee-bg": colors.bg,
+                    "--attendee-fg": colors.fg,
+                  }}
+                >
+                  <span class="attendee__avatar">
+                    <span aria-hidden="true">{initial}</span>
+                  </span>
+                  <span class="attendee__name">{attendee}</span>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      )
+    }
   </div>
 </li>
 
@@ -377,7 +382,9 @@ function formatDate(date: Date): string {
     gap: var(--space-4xs);
     background: rgba(255, 255, 255, 0.02);
     padding: var(--space-4xs) var(--space-3xs);
-    transition: background 0.2s ease, box-shadow 0.2s ease;
+    transition:
+      background 0.2s ease,
+      box-shadow 0.2s ease;
   }
 
   .attendee:hover {
@@ -407,7 +414,10 @@ function formatDate(date: Date): string {
     visibility: hidden;
     overflow: hidden;
     white-space: nowrap;
-    transition: max-width 0.25s ease, opacity 0.2s ease, padding 0.2s ease,
+    transition:
+      max-width 0.25s ease,
+      opacity 0.2s ease,
+      padding 0.2s ease,
       visibility 0.2s ease;
   }
 
