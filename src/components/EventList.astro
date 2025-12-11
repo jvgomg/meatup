@@ -40,6 +40,39 @@ const pastAttendeeTotal = pastEvents.reduce(
 const averageAttendanceValue = pastEvents.length ? pastAttendeeTotal / pastEvents.length : 0;
 const averageAttendanceDisplay = averageAttendanceValue.toFixed(1);
 
+const attendeeCounts = new Map<string, number>();
+for (const event of normalizedEvents) {
+  for (const attendee of event.attendees ?? []) {
+    attendeeCounts.set(attendee, (attendeeCounts.get(attendee) ?? 0) + 1);
+  }
+}
+
+let mostAttended: string[] = [];
+let leastAttended: string[] = [];
+let mostAttendedCount = 0;
+let leastAttendedCount = Infinity;
+
+for (const [attendee, count] of attendeeCounts.entries()) {
+  if (count > mostAttendedCount) {
+    mostAttended = [attendee];
+    mostAttendedCount = count;
+  } else if (count === mostAttendedCount) {
+    mostAttended.push(attendee);
+  }
+
+  if (count < leastAttendedCount) {
+    leastAttended = [attendee];
+    leastAttendedCount = count;
+  } else if (count === leastAttendedCount) {
+    leastAttended.push(attendee);
+  }
+}
+
+if (!attendeeCounts.size) {
+  mostAttendedCount = 0;
+  leastAttendedCount = 0;
+}
+
 const venueCounts = new Map<string, number>();
 for (const event of normalizedEvents) {
   if (event.primaryVenue?.name) {
@@ -78,6 +111,10 @@ function formatSummaryDate(date?: Date) {
   if (!date) return '—';
   return date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
 }
+
+const pluralizeMeatings = (count: number) => `${count} meat${count === 1 ? 'ing' : 'ings'}`;
+const formatNameList = (names: string[]) =>
+  names.length ? names.toSorted((a, b) => a.localeCompare(b)).join(', ') : '—';
 ---
 
 <section class="event-sections">
@@ -124,6 +161,20 @@ function formatSummaryDate(date?: Date) {
         </p>
         <p class="summary__meta">
           Total {totalAttendees} · {uniqueAttendees.size} unique
+        </p>
+      </div>
+      <div class="summary__card">
+        <p class="summary__label">Most attended</p>
+        <p class="summary__value summary__value--text">{formatNameList(mostAttended)}</p>
+        <p class="summary__meta">
+          {mostAttendedCount ? pluralizeMeatings(mostAttendedCount) : 'No attendance yet'}
+        </p>
+      </div>
+      <div class="summary__card">
+        <p class="summary__label">Least attended</p>
+        <p class="summary__value summary__value--text">{formatNameList(leastAttended)}</p>
+        <p class="summary__meta">
+          {leastAttendedCount ? pluralizeMeatings(leastAttendedCount) : 'No attendance yet'}
         </p>
       </div>
       <div class="summary__card">
@@ -329,6 +380,14 @@ function formatSummaryDate(date?: Date) {
     transition-delay: 200ms;
   }
 
+  .summary--visible .summary__card:nth-child(6) {
+    transition-delay: 240ms;
+  }
+
+  .summary--visible .summary__card:nth-child(7) {
+    transition-delay: 280ms;
+  }
+
   @media (max-width: 600px) {
     .summary__card--wide {
       grid-column: span 1;
@@ -348,6 +407,12 @@ function formatSummaryDate(date?: Date) {
     font-weight: 800;
     margin: 0;
     line-height: 1;
+  }
+
+  .summary__value--text {
+    font-size: var(--text-section);
+    line-height: 1.2;
+    word-break: break-word;
   }
 
   .summary__meta {
