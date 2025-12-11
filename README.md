@@ -75,9 +75,9 @@ Events are defined in `src/content/events/events.yaml` with the following schema
   - `address` - Physical address (optional)
   - `googleMapsLink` - Link to Google Maps (optional)
 - `secondaryVenues` - Array of additional venues (optional)
-- `attendees` - List of attendee aliases (no real names in git). Keep any real-name → alias mapping locally in `local/attendee-aliases.yaml` (gitignored).
+- `attendees` - List of attendee first names (add surname initial where needed to disambiguate).
 
-Attendee “first meat up” labels are derived automatically based on the earliest event containing each alias.
+Attendee “first meat up” labels are derived automatically based on the earliest event containing each name.
 
 ## License
 

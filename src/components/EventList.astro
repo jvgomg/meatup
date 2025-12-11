@@ -26,12 +26,9 @@ const upcomingEvents = eventsDescending
 
 const pastEvents = eventsDescending.filter((event) => !upcomingStatuses.has(event.status));
 
-const totalEvents = normalizedEvents.length;
-const totalAttendees = normalizedEvents.reduce(
-  (sum, event) => sum + (event.attendees?.length ?? 0),
-  0,
-);
-const uniqueAttendees = new Set(normalizedEvents.flatMap((event) => event.attendees ?? []));
+const totalEvents = pastEvents.length;
+const totalAttendees = pastEvents.reduce((sum, event) => sum + (event.attendees?.length ?? 0), 0);
+const uniqueAttendees = new Set(pastEvents.flatMap((event) => event.attendees ?? []));
 
 const pastAttendeeTotal = pastEvents.reduce(
   (sum, event) => sum + (event.attendees?.length ?? 0),
@@ -41,7 +38,7 @@ const averageAttendanceValue = pastEvents.length ? pastAttendeeTotal / pastEvent
 const averageAttendanceDisplay = averageAttendanceValue.toFixed(1);
 
 const attendeeCounts = new Map<string, number>();
-for (const event of normalizedEvents) {
+for (const event of pastEvents) {
   for (const attendee of event.attendees ?? []) {
     attendeeCounts.set(attendee, (attendeeCounts.get(attendee) ?? 0) + 1);
   }
@@ -95,9 +92,9 @@ for (const [venueName, count] of venueCounts.entries()) {
   }
 }
 
-const completedCount = normalizedEvents.filter((event) => event.status === 'completed').length;
-const scheduledCount = normalizedEvents.filter((event) => event.status === 'scheduled').length;
-const failedCount = normalizedEvents.filter((event) => event.status === 'failed').length;
+const completedCount = pastEvents.filter((event) => event.status === 'completed').length;
+const failedCount = pastEvents.filter((event) => event.status === 'failed').length;
+const scheduledCount = upcomingEvents.length;
 
 const lastHeldEvent = pastEvents[0];
 const daysSinceLast =

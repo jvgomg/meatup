@@ -44,16 +44,16 @@ const statusBadge = status !== "completed" ? `status-badge--${status}` : "";
 const eventToneClass = status !== "completed" ? `event--${status}` : "";
 const eventNumberStr = eventNumber.toString();
 const attendeeColorMap: Record<string, { bg: string; fg: string }> = {
-  Atlas: { bg: "var(--mustard-yellow)", fg: "var(--carbon-black)" },
-  Morse: { bg: "rgba(224, 79, 95, 0.9)", fg: "var(--stark-white)" },
-  Titan: { bg: "rgba(255, 255, 255, 0.2)", fg: "var(--stark-white)" },
-  Ranger: { bg: "rgba(0, 0, 0, 0.8)", fg: "var(--mustard-yellow)" },
-  Aster: { bg: "rgba(255, 255, 255, 0.25)", fg: "var(--carbon-black)" },
-  Archer: { bg: "rgba(224, 79, 95, 0.65)", fg: "var(--carbon-black)" },
-  Blaze: { bg: "rgba(255, 205, 86, 0.25)", fg: "var(--carbon-black)" },
-  Moss: { bg: "rgba(0, 0, 0, 0.65)", fg: "var(--stark-white)" },
-  Grove: { bg: "rgba(255, 205, 86, 0.4)", fg: "var(--carbon-black)" },
-  Marlin: { bg: "rgba(224, 79, 95, 0.55)", fg: "var(--stark-white)" },
+  "Alex T": { bg: "var(--mustard-yellow)", fg: "var(--carbon-black)" },
+  "Martin J": { bg: "rgba(224, 79, 95, 0.9)", fg: "var(--stark-white)" },
+  Thorsten: { bg: "rgba(255, 255, 255, 0.2)", fg: "var(--stark-white)" },
+  Rico: { bg: "rgba(0, 0, 0, 0.8)", fg: "var(--mustard-yellow)" },
+  Alice: { bg: "rgba(255, 255, 255, 0.25)", fg: "var(--carbon-black)" },
+  Ali: { bg: "rgba(224, 79, 95, 0.65)", fg: "var(--carbon-black)" },
+  Amber: { bg: "rgba(255, 205, 86, 0.25)", fg: "var(--carbon-black)" },
+  "Matt R": { bg: "rgba(0, 0, 0, 0.65)", fg: "var(--stark-white)" },
+  "James G": { bg: "rgba(255, 205, 86, 0.4)", fg: "var(--carbon-black)" },
+  "James M": { bg: "rgba(224, 79, 95, 0.55)", fg: "var(--stark-white)" },
 };
 
 const fallbackPalette = [
