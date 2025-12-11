@@ -1,13 +1,13 @@
 ---
-import { getEntry } from 'astro:content';
-import EventCard from './EventCard.astro';
+import { getEntry } from "astro:content";
+import EventCard from "./EventCard.astro";
 
-const entry = await getEntry('events', 'events');
-if (!entry) throw new Error('Events not found');
-const upcomingStatuses = new Set(['scheduled']);
+const entry = await getEntry("events", "events");
+if (!entry) throw new Error("Events not found");
+const upcomingStatuses = new Set(["scheduled"]);
 const normalizedEvents = entry.data.map((event) => ({
   ...event,
-  status: event.status ?? 'scheduled',
+  status: event.status ?? "scheduled",
   attendees: event.attendees ?? [],
 }));
 
@@ -24,17 +24,26 @@ const upcomingEvents = eventsDescending
   .filter((event) => upcomingStatuses.has(event.status))
   .toSorted((a, b) => b.date.getTime() - a.date.getTime());
 
-const pastEvents = eventsDescending.filter((event) => !upcomingStatuses.has(event.status));
+const pastEvents = eventsDescending.filter(
+  (event) => !upcomingStatuses.has(event.status)
+);
 
 const totalEvents = pastEvents.length;
-const totalAttendees = pastEvents.reduce((sum, event) => sum + (event.attendees?.length ?? 0), 0);
-const uniqueAttendees = new Set(pastEvents.flatMap((event) => event.attendees ?? []));
+const totalAttendees = pastEvents.reduce(
+  (sum, event) => sum + (event.attendees?.length ?? 0),
+  0
+);
+const uniqueAttendees = new Set(
+  pastEvents.flatMap((event) => event.attendees ?? [])
+);
 
 const pastAttendeeTotal = pastEvents.reduce(
   (sum, event) => sum + (event.attendees?.length ?? 0),
-  0,
+  0
 );
-const averageAttendanceValue = pastEvents.length ? pastAttendeeTotal / pastEvents.length : 0;
+const averageAttendanceValue = pastEvents.length
+  ? pastAttendeeTotal / pastEvents.length
+  : 0;
 const averageAttendanceDisplay = averageAttendanceValue.toFixed(1);
 
 const attendeeCounts = new Map<string, number>();
@@ -73,7 +82,10 @@ if (!attendeeCounts.size) {
 const venueCounts = new Map<string, number>();
 for (const event of normalizedEvents) {
   if (event.primaryVenue?.name) {
-    venueCounts.set(event.primaryVenue.name, (venueCounts.get(event.primaryVenue.name) ?? 0) + 1);
+    venueCounts.set(
+      event.primaryVenue.name,
+      (venueCounts.get(event.primaryVenue.name) ?? 0) + 1
+    );
   }
   for (const venue of event.secondaryVenues ?? []) {
     if (venue.name) {
@@ -92,8 +104,12 @@ for (const [venueName, count] of venueCounts.entries()) {
   }
 }
 
-const completedCount = pastEvents.filter((event) => event.status === 'completed').length;
-const failedCount = pastEvents.filter((event) => event.status === 'failed').length;
+const completedCount = pastEvents.filter(
+  (event) => event.status === "completed"
+).length;
+const failedCount = pastEvents.filter(
+  (event) => event.status === "failed"
+).length;
 const scheduledCount = upcomingEvents.length;
 
 const lastHeldEvent = pastEvents[0];
@@ -101,13 +117,18 @@ const lastHeldEvent = pastEvents[0];
 const nextEvent = upcomingEvents[0];
 
 function formatSummaryDate(date?: Date) {
-  if (!date) return '—';
-  return date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+  if (!date) return "—";
+  return date.toLocaleDateString("en-GB", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
 }
 
-const pluralizeMeatings = (count: number) => `${count} meat${count === 1 ? 'ing' : 'ings'}`;
+const pluralizeMeatings = (count: number) =>
+  `${count} meat${count === 1 ? "ing" : "ings"}`;
 const formatNameList = (names: string[]) =>
-  names.length ? names.toSorted((a, b) => a.localeCompare(b)).join(', ') : '—';
+  names.length ? names.toSorted((a, b) => a.localeCompare(b)).join(", ") : "—";
 ---
 
 <section class="event-sections">
@@ -140,7 +161,11 @@ const formatNameList = (names: string[]) =>
           {scheduledCount}
         </p>
         <p class="summary__meta">
-          {nextEvent ? `Next: ${formatSummaryDate(nextEvent.date)}` : 'No bookings yet'}
+          {
+            nextEvent
+              ? `Next: ${formatSummaryDate(nextEvent.date)}`
+              : "No bookings yet"
+          }
         </p>
       </div>
       <div class="summary__card">
@@ -158,16 +183,28 @@ const formatNameList = (names: string[]) =>
       </div>
       <div class="summary__card">
         <p class="summary__label">Most attended</p>
-        <p class="summary__value summary__value--text">{formatNameList(mostAttended)}</p>
+        <p class="summary__value summary__value--text">
+          {formatNameList(mostAttended)}
+        </p>
         <p class="summary__meta">
-          {mostAttendedCount ? pluralizeMeatings(mostAttendedCount) : 'No attendance yet'}
+          {
+            mostAttendedCount
+              ? pluralizeMeatings(mostAttendedCount)
+              : "No attendance yet"
+          }
         </p>
       </div>
       <div class="summary__card">
         <p class="summary__label">Least attended</p>
-        <p class="summary__value summary__value--text">{formatNameList(leastAttended)}</p>
+        <p class="summary__value summary__value--text">
+          {formatNameList(leastAttended)}
+        </p>
         <p class="summary__meta">
-          {leastAttendedCount ? pluralizeMeatings(leastAttendedCount) : 'No attendance yet'}
+          {
+            leastAttendedCount
+              ? pluralizeMeatings(leastAttendedCount)
+              : "No attendance yet"
+          }
         </p>
       </div>
       <div class="summary__card">
@@ -180,89 +217,102 @@ const formatNameList = (names: string[]) =>
           {uniqueVenues}
         </p>
         <p class="summary__meta">
-          {topVenue ? `Top: ${topVenue}` : 'No venues yet'}
+          {topVenue ? `Top: ${topVenue}` : "No venues yet"}
         </p>
       </div>
       <div class="summary__card summary__card--wide">
         <p class="summary__label">Last meatup</p>
         <p class="summary__value">
-          {lastHeldEvent ? formatSummaryDate(lastHeldEvent.date) : '—'}
+          {lastHeldEvent ? formatSummaryDate(lastHeldEvent.date) : "—"}
         </p>
         <p
           class="summary__meta"
           data-relative-date={lastHeldEvent?.date?.toISOString()}
         >
-          {lastHeldEvent ? 'Calculating...' : 'Waiting for the first one'}
+          {lastHeldEvent ? "Calculating..." : "Waiting for the first one"}
         </p>
       </div>
     </div>
   </div>
 
-  {upcomingEvents.length > 0 && (
-    <div class="events-group">
-      <header class="events-group__header">
-        <p class="eyebrow">Upcoming meatings</p>
+  {
+    upcomingEvents.length > 0 && (
+      <div class="events-group">
+        <header class="events-group__header">
+          <p class="eyebrow">Upcoming meatings</p>
         <p class="upcoming-pun" data-pun>
           Time to raise the steaks and pencil in the next one.
         </p>
-      </header>
-      <ul class="events">
-        {upcomingEvents.map((event) => (
-          <EventCard {...event} />
-        ))}
-      </ul>
-    </div>
-  )}
-
-  {upcomingEvents.length === 0 && (
-    <div class="events-group events-group--empty">
-      <header class="events-group__header">
-        <p class="eyebrow">Upcoming meatings</p>
-        <p class="empty__title">None on the books</p>
-      </header>
-      <div class="empty__card">
-        <p class="empty__copy">
-          Calendar is bare. Someone pick a date before we end up “meeting” at the closest Subway.
-        </p>
+        </header>
+        <ul class="events">
+          {upcomingEvents.map((event) => (
+            <EventCard {...event} />
+          ))}
+        </ul>
       </div>
-    </div>
-  )}
+    )
+  }
 
-  {pastEvents.length > 0 && (
-    <div class="events-group">
-      <header class="events-group__header">
-        <p class="eyebrow">Past meatings</p>
-      </header>
-      <ul class="events">
-        {pastEvents.map((event) => (
-          <EventCard {...event} />
-        ))}
-      </ul>
-    </div>
-  )}
+  {
+    upcomingEvents.length === 0 && (
+      <div class="events-group events-group--empty">
+        <header class="events-group__header">
+          <p class="eyebrow">Upcoming meatings</p>
+          <p class="empty__title">None on the books</p>
+        </header>
+        <div class="empty__card">
+          <p class="empty__copy">
+            Calendar is bare. Someone pick a date before we end up “meeting” at
+            the closest Subway.
+          </p>
+        </div>
+      </div>
+    )
+  }
+
+  {
+    pastEvents.length > 0 && (
+      <div class="events-group">
+        <header class="events-group__header">
+          <p class="eyebrow">Past meatings</p>
+        </header>
+        <ul class="events">
+          {pastEvents.map((event) => (
+            <EventCard {...event} />
+          ))}
+        </ul>
+      </div>
+    )
+  }
 </section>
 
 <script>
   // Calculate relative dates client-side so they're always accurate
-  document.querySelectorAll('[data-relative-date]').forEach((el) => {
-    const dateStr = el.getAttribute('data-relative-date');
+  document.querySelectorAll("[data-relative-date]").forEach((el) => {
+    const dateStr = el.getAttribute("data-relative-date");
     if (!dateStr) return;
     const date = new Date(dateStr);
-    const days = Math.floor((Date.now() - date.getTime()) / (1000 * 60 * 60 * 24));
-    el.textContent = `${days} day${days === 1 ? '' : 's'} ago`;
+    const days = Math.floor(
+      (Date.now() - date.getTime()) / (1000 * 60 * 60 * 24)
+    );
+    el.textContent = `${days} day${days === 1 ? "" : "s"} ago`;
   });
 
-  const summary = document.querySelector('.summary');
+  const summary = document.querySelector(".summary");
 
   if (summary) {
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const statValues = summary.querySelectorAll('[data-count-target]');
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    const statValues = summary.querySelectorAll("[data-count-target]");
 
     const animateValue = (element: Element, index: number) => {
-      const target = Number(element.getAttribute('data-count-target') ?? '0');
+      const target = Number(element.getAttribute("data-count-target") ?? "0");
       if (!Number.isFinite(target)) return;
 
-      const decimals = Number(element.getAttribute('data-count-decimals') ?? '0');
+      const decimals = Number(
+        element.getAttribute("data-count-decimals") ?? "0"
+      );
       const duration = 1300 + index * 120;
       const start = performance.now();
 
@@ -279,12 +329,12 @@ const formatNameList = (names: string[]) =>
     };
 
     const revealStats = () => {
-      summary.classList.add('summary--visible');
+      summary.classList.add("summary--visible");
       statValues.forEach((element, index) => animateValue(element, index));
     };
 
     if (!prefersReducedMotion) {
-      summary.classList.add('summary--animate-ready');
+      summary.classList.add("summary--animate-ready");
       const observer = new IntersectionObserver(
         (entries, obs) => {
           const hasIntersected = entries.some((entry) => entry.isIntersecting);
@@ -293,7 +343,7 @@ const formatNameList = (names: string[]) =>
             obs.disconnect();
           }
         },
-        { threshold: 0.45 },
+        { threshold: 0.45 }
       );
 
       observer.observe(summary);
@@ -327,7 +377,8 @@ const formatNameList = (names: string[]) =>
     gap: var(--space-m);
     padding: var(--space-m);
     border: 2px solid var(--carbon-black);
-    background: linear-gradient(
+    background:
+      linear-gradient(
         135deg,
         rgba(255, 205, 86, 0.12),
         rgba(255, 255, 255, 0.02)
@@ -362,13 +413,17 @@ const formatNameList = (names: string[]) =>
     grid-template-rows: auto 1fr auto;
     gap: var(--space-3xs);
     padding: var(--space-s);
+    padding-bottom: var(--space-xs);
     border-radius: var(--radius, 0.5rem);
     border: 1px solid rgba(255, 255, 255, 0.4);
     background: rgba(255, 255, 255, 0.03);
     box-shadow: 2px 2px 0 var(--carbon-black);
     position: relative;
     overflow: hidden;
-    transition: transform 360ms ease, opacity 360ms ease, box-shadow 220ms ease;
+    transition:
+      transform 360ms ease,
+      opacity 360ms ease,
+      box-shadow 220ms ease;
   }
 
   .summary--animate-ready .summary__card {
@@ -458,6 +513,7 @@ const formatNameList = (names: string[]) =>
     font-size: var(--step--1);
     opacity: 0.85;
     margin: 0;
+    margin-top: var(--space-2xs);
     line-height: 1.4;
   }
 
