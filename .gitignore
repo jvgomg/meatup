@@ -30,6 +30,7 @@ pnpm-debug.log*
 eventsdraft.csv
 _chat.txt
 local/attendee-aliases.*
+meatup.code-workspace
 
 # vercel output
 .vercel
