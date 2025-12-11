@@ -8,7 +8,11 @@
     - name: "Horseshoe Inn"
       address: "26 Melior Street, Bermondsey, London SE1 3QP"
   note: "First meat up: 7:30 booking near the secret pool club, pre-beers at Horseshoe, then maybe N1 Bar if we weren’t flatlining."
-  attendees: []
+  attendees:
+    - Atlas
+    - Morse
+    - Titan
+    - Ranger
 
 - date: 2023-11-23
   status: completed
@@ -17,7 +21,10 @@
     address: "35 Sclater Street, London E1 6LB"
     googleMapsLink: "https://maps.app.goo.gl/Cfo4QGXioPPgefaF7"
   note: "One regular was stuck in Jersey; 7/7:30 table, pre-pint nearby. Brisket was fine, smoke was biblical—clothes straight to the balcony/dry cleaner."
-  attendees: []
+  attendees:
+    - Atlas
+    - Morse
+    - Titan
 
 - date: 2024-03-07
   status: completed
@@ -30,7 +37,11 @@
       address: "137-139 St John Street, London EC1V 4JP"
       googleMapsLink: "https://maps.google.com/?q=Clerkenwell+Tavern,+137-139+St+John+St,+London+EC1V+4JP"
   note: "Poll shuffle, booking secured; one member nearly bailed for an interview. Pre-Guinness from ~6 at Clerkenwell Tavern before dinner."
-  attendees: []
+  attendees:
+    - Atlas
+    - Morse
+    - Titan
+    - Ranger
 
 - date: 2024-05-09
   status: completed
@@ -39,7 +50,13 @@
     address: "11-13 Market Place, London W1W 8AH"
     googleMapsLink: "https://maps.google.com/?q=The+Oxford+Market,+11-13+Market+Place,+London+W1W+8AH"
   note: "Chill round with partners welcome; one regular was revising. Pub was heaving, lots of fridge-selling and ‘is it even open?’ banter."
-  attendees: []
+  attendees:
+    - Atlas
+    - Morse
+    - Titan
+    - Aster
+    - Archer
+    - Blaze
 
 - date: 2024-06-27
   status: completed
@@ -52,7 +69,11 @@
       address: "1 Queen Square, London WC1N 3AT"
       googleMapsLink: "https://maps.google.com/?q=Queen's+Larder,+1+Queen+Square,+London+WC1N+3AT"
   note: "Full squad; 6pm beers at Queen’s Larder then Swiss Butter. Celebratory vibes for a new job (and plenty of Stella price commentary)."
-  attendees: []
+  attendees:
+    - Atlas
+    - Morse
+    - Titan
+    - Ranger
 
 - date: 2024-07-27
   status: completed
@@ -65,7 +86,12 @@
       address: "7 Lockwood Way, London E17 5QZ"
       googleMapsLink: "https://maps.google.com/?q=Renegade+Urban+Winery,+7+Lockwood+Way,+London+E17+5QZ"
   note: "Meat up on tour: wetlands stroll from Tottenham Hale, Renegade Urban Winery into Hackney breweries; Black Cactus ran out of food/ice but the crawl and chaos made it a top-tier night."
-  attendees: []
+  attendees:
+    - Atlas
+    - Morse
+    - Titan
+    - Ranger
+    - Moss
 
 - date: 2024-09-11
   status: completed
@@ -81,7 +107,13 @@
       address: "26 Melior Street, London SE1 3QP"
       googleMapsLink: "https://maps.google.com/?q=Horseshoe+Inn,+26+Melior+St,+London+SE1+3QP"
   note: "BBQ benchmark from earlier hype; floated as the next hit after polls with ‘invite?’ jokes. Pre-Guinness at Betsy Trottwood before regrouping at the Horseshoe then Texas Joe's."
-  attendees: []
+  attendees:
+    - Atlas
+    - Morse
+    - Titan
+    - Ranger
+    - Archer
+    - Grove
 
 - date: 2025-02-20
   status: completed
@@ -93,7 +125,10 @@
     - name: "Queen's Head"
       address: "15 Denman Street, Soho, London W1D 7HN"
   note: "7:15 table locked in; one person bailed and another watched jealously. Soho was heaving so pre-beers bounced between the Devonshire plan and the Queen’s Head; a pair landed bang on 6 with others close behind."
-  attendees: []
+  attendees:
+    - Atlas
+    - Morse
+    - Titan
 
 - date: 2025-03-18
   status: failed
@@ -102,7 +137,11 @@
     address: "The Sidings, Waterloo Station, London SE1 7BH"
     googleMapsLink: "https://maps.google.com/?q=Flat+Iron,+The+Sidings,+Waterloo+Station,+London+SE1+7BH"
   note: "Could not get in to Carcass Club at Flat Iron; pivoted to a nearby pub."
-  attendees: []
+  attendees:
+    - Atlas
+    - Morse
+    - Ranger
+    - Moss
 
 - date: 2025-07-17
   status: completed
@@ -115,7 +154,12 @@
       address: "96 Isabella Street, London SE1 8DD"
       googleMapsLink: "https://maps.app.goo.gl/57qjjWK1ZtBvGiXa9?g_st=ipc"
   note: "Date pencilled; booking to be locked once numbers firm up."
-  attendees: []
+  attendees:
+    - Atlas
+    - Morse
+    - Ranger
+    - Moss
+    - Grove
 
 - date: 2025-08-28
   status: completed
@@ -128,7 +172,11 @@
       address: "15 Denman Street, London W1D 7HN"
       googleMapsLink: "https://maps.app.goo.gl/66FVEPKjy4ZpdA9s7?g_st=ac"
   note: "Late-summer Fowl run; waiting for booking window to open."
-  attendees: []
+  attendees:
+    - Atlas
+    - Titan
+    - Grove
+    - Moss
 
 - date: 2025-10-09
   status: completed
@@ -141,7 +189,13 @@
       address: "29 Greek Street, London W1D 5DH"
       googleMapsLink: "https://maps.app.goo.gl/iZFJPdqzrjx4AW6XA?g_st=ipc"
   note: "7:15 Burger & Beyond table; one member ummed and ahhed but rocked up. Pre-pints from ~6 at the Soho pub with the good Guinness (map link) before rolling to dinner."
-  attendees: []
+  attendees:
+    - Atlas
+    - Morse
+    - Titan
+    - Ranger
+    - Archer
+    - Marlin
 
 - date: 2025-12-03
   status: completed
@@ -154,7 +208,13 @@
       address: "4-6 Ganton St, Carnaby, London W1F 7QN"
       googleMapsLink: "https://maps.app.goo.gl/wVvXzxSv6cN6ueCs9?g_st=ipc"
   note: "Festive steak night target; booking window not open yet."
-  attendees: []
+  attendees:
+    - Atlas
+    - Morse
+    - Ranger
+    - Archer
+    - Grove
+    - Moss
 
 - date: 2026-01-15
   status: scheduled

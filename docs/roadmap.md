@@ -11,6 +11,8 @@ Curated feature ideas to level up the experience. Grouped by theme for quick pla
 - RSVP flow with attendee caps and waitlist handling
 - Add-to-calendar (ICS + Google/Apple) and shareable social cards
 - Event reminders/digests via email or web push notifications
+- Attendee counts and names surfaced per event, with basic privacy controls
+- Flag first-timers so we can welcome newcomers on their debut meat up
 
 ## Rich Content
 - Expanded event pages: photo gallery, speaker bios, session schedule
@@ -21,6 +23,8 @@ Curated feature ideas to level up the experience. Grouped by theme for quick pla
 - Attendee list previews (avatars/names) with privacy-safe defaults
 - Comments/questions per event; simple voting on future topics/locations
 - Organizer profiles with past and upcoming events
+- Lightweight polls and feedback widgets to capture sentiment/ideas post-event
+- Prominent “Upcoming events” block so the next bookings are always visible
 
 ## Conversion & Growth
 - Referral links and promo codes

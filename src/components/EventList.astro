@@ -5,13 +5,20 @@ import EventCard from './EventCard.astro';
 const entry = await getEntry('events', 'events');
 if (!entry) throw new Error('Events not found');
 const upcomingStatuses = new Set(['scheduled']);
-const eventsDescending = entry.data
-  .map((event) => ({ ...event, status: event.status ?? 'scheduled' }))
+const normalizedEvents = entry.data.map((event) => ({
+  ...event,
+  status: event.status ?? 'scheduled',
+  attendees: event.attendees ?? [],
+}));
+
+const eventsDescending = normalizedEvents
   .toSorted((a, b) => b.date.getTime() - a.date.getTime())
-  .map((event, index, list) => ({
-    ...event,
-    eventNumber: list.length - index,
-  }));
+  .map((event, index, list) => {
+    return {
+      ...event,
+      eventNumber: list.length - index,
+    };
+  });
 
 const upcomingEvents = eventsDescending
   .filter((event) => upcomingStatuses.has(event.status))
