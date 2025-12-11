@@ -17,7 +17,6 @@ interface Props {
   secondaryVenues?: Venue[];
   note?: string;
   attendees: string[];
-  firstTimers?: string[];
 }
 
 const {
@@ -28,7 +27,6 @@ const {
   status = "scheduled",
   note,
   attendees,
-  firstTimers = [],
 } = Astro.props;
 
 const statusLabels: Record<EventStatus, string> = {
@@ -44,7 +42,6 @@ const statusMeta: Partial<Record<EventStatus, string>> = {
 
 const statusBadge = status !== "completed" ? `status-badge--${status}` : "";
 const eventToneClass = status !== "completed" ? `event--${status}` : "";
-const firstTimerSet = new Set(firstTimers);
 const eventNumberStr = eventNumber.toString();
 const attendeeColorMap: Record<string, { bg: string; fg: string }> = {
   Atlas: { bg: "var(--mustard-yellow)", fg: "var(--carbon-black)" },
@@ -175,12 +172,11 @@ function formatDate(date: Date): string {
         <span class="attendees__label">Attendees</span>
         <ul class="attendees__list">
           {attendees.map((attendee) => {
-            const isFirst = firstTimerSet.has(attendee);
             const initial = attendee.slice(0, 1).toUpperCase();
             const colors = getAttendeeColors(attendee);
             return (
               <li
-                class:list={["attendee", isFirst && "attendee--first"]}
+                class="attendee"
                 title={attendee}
                 style={{
                   "--attendee-bg": colors.bg,
@@ -189,11 +185,6 @@ function formatDate(date: Date): string {
               >
                 <span class="attendee__avatar">
                   <span aria-hidden="true">{initial}</span>
-                  {isFirst && (
-                    <span class="attendee__new" aria-label="First meat up">
-                      🥩
-                    </span>
-                  )}
                 </span>
                 <span class="attendee__name">{attendee}</span>
               </li>
@@ -386,7 +377,7 @@ function formatDate(date: Date): string {
     align-items: center;
     gap: var(--space-4xs);
     background: rgba(255, 255, 255, 0.02);
-    padding: var(--space-5xs) var(--space-5xs);
+    padding: var(--space-4xs) var(--space-3xs);
     transition: background 0.2s ease, box-shadow 0.2s ease;
   }
 
@@ -414,35 +405,22 @@ function formatDate(date: Date): string {
   .attendee__name {
     max-width: 0;
     opacity: 0;
+    visibility: hidden;
     overflow: hidden;
     white-space: nowrap;
-    transition: max-width 0.25s ease, opacity 0.2s ease;
+    transition: max-width 0.25s ease, opacity 0.2s ease, padding 0.2s ease,
+      visibility 0.2s ease;
   }
 
   .attendee:hover .attendee__name {
-    max-width: 12rem;
+    max-width: 11rem;
     opacity: 1;
-    padding-right: var(--space-4xs);
+    padding-left: var(--space-3xs);
+    padding-right: var(--space-3xs);
+    visibility: visible;
   }
 
   .attendee:hover .attendee__avatar {
     transform: translateY(-1px);
-  }
-
-  .attendee__new {
-    position: absolute;
-    right: -0.2rem;
-    top: -0.3rem;
-    background: var(--mustard-yellow);
-    color: var(--carbon-black);
-    border: 2px solid var(--stark-white);
-    border-radius: 999px;
-    padding: 0.1rem 0.35rem;
-    font-size: 0.65rem;
-    font-weight: 800;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    pointer-events: none;
   }
 </style>

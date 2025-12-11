@@ -11,33 +11,12 @@ const normalizedEvents = entry.data.map((event) => ({
   attendees: event.attendees ?? [],
 }));
 
-const firstSeen = new Map<string, number>();
-const eventsAscending = normalizedEvents
-  .toSorted((a, b) => a.date.getTime() - b.date.getTime())
-  .map((event) => ({
-    ...event,
-    attendees: event.attendees ?? [],
-  }));
-
-for (const event of eventsAscending) {
-  for (const attendee of event.attendees) {
-    if (!firstSeen.has(attendee)) {
-      firstSeen.set(attendee, event.date.getTime());
-    }
-  }
-}
-
 const eventsDescending = normalizedEvents
   .toSorted((a, b) => b.date.getTime() - a.date.getTime())
   .map((event, index, list) => {
-    const firstTimers = event.attendees.filter(
-      (attendee) => firstSeen.get(attendee) === event.date.getTime(),
-    );
-
     return {
       ...event,
       eventNumber: list.length - index,
-      firstTimers,
     };
   });
 
