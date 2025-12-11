@@ -116,6 +116,15 @@ const lastHeldEvent = pastEvents[0];
 
 const nextEvent = upcomingEvents[0];
 
+const puns = [
+  "Time to raise the steaks and pencil in the next one.",
+  "Quit stall-ing—let's herd some calendars.",
+  "We need to meat in the middle before the grill goes cold.",
+  "BBQ without a booking? That's a mis-steak waiting to happen.",
+  "No plan? That's rare. Let's get it cooked to medium soon.",
+  "Calendar is bare. Someone pick a date before we end up meeting at the closest Subway.",
+];
+
 function formatSummaryDate(date?: Date) {
   if (!date) return "—";
   return date.toLocaleDateString("en-GB", {
@@ -240,8 +249,8 @@ const formatNameList = (names: string[]) =>
       <div class="events-group">
         <header class="events-group__header">
           <p class="eyebrow">Upcoming meatings</p>
-        <p class="upcoming-pun" data-pun>
-          Time to raise the steaks and pencil in the next one.
+        <p class="upcoming-pun" data-pun data-puns={JSON.stringify(puns)}>
+          {puns[0]}
         </p>
         </header>
         <ul class="events">
@@ -261,9 +270,8 @@ const formatNameList = (names: string[]) =>
           <p class="empty__title">None on the books</p>
         </header>
         <div class="empty__card">
-          <p class="empty__copy">
-            Calendar is bare. Someone pick a date before we end up “meeting” at
-            the closest Subway.
+          <p class="empty__copy" data-pun data-puns={JSON.stringify(puns)}>
+            {puns[0]}
           </p>
         </div>
       </div>
@@ -351,16 +359,12 @@ const formatNameList = (names: string[]) =>
   }
 
   const punTarget = document.querySelector<HTMLElement>('[data-pun]');
-  const puns = [
-    'Time to raise the steaks and pencil in the next one.',
-    'Quit stall-ing—let’s herd some calendars.',
-    'We need to meat in the middle before the grill goes cold.',
-    'BBQ without a booking? That’s a mis-steak waiting to happen.',
-    'No plan? That’s rare. Let’s get it cooked to medium soon.',
-  ];
-  if (punTarget && puns.length) {
-    const pick = puns[Math.floor(Math.random() * puns.length)];
-    punTarget.textContent = pick;
+  if (punTarget) {
+    const puns = JSON.parse(punTarget.dataset.puns || '[]') as string[];
+    if (puns.length) {
+      const pick = puns[Math.floor(Math.random() * puns.length)];
+      punTarget.textContent = pick;
+    }
   }
 </script>
 
