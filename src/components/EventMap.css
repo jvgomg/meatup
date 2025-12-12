@@ -1,11 +1,13 @@
 .map-shell {
   position: relative;
-  border: 2px solid var(--carbon-black);
+  border: 2px solid var(--stark-white);
   background:
-    radial-gradient(circle at 20% 20%, rgba(224, 79, 95, 0.14), transparent 36%),
-    radial-gradient(circle at 80% 30%, rgba(255, 205, 86, 0.12), transparent 34%),
-    rgba(255, 255, 255, 0.03);
-  box-shadow: 6px 6px 0 var(--carbon-black);
+    radial-gradient(circle at 16% 20%, rgba(224, 79, 95, 0.18), transparent 32%),
+    radial-gradient(circle at 82% 10%, rgba(255, 219, 88, 0.2), transparent 38%),
+    linear-gradient(135deg, rgba(17, 17, 17, 0.9), rgba(17, 17, 17, 0.7));
+  box-shadow:
+    0 22px 64px rgba(0, 0, 0, 0.55),
+    10px 10px 0 var(--carbon-black);
   border-radius: 18px;
   overflow: hidden;
 }
@@ -20,26 +22,32 @@
 }
 
 .map-shell__control-button {
-  border: 2px solid var(--carbon-black);
-  background: var(--mustard-yellow);
-  color: var(--carbon-black);
+  border: 2px solid var(--stark-white);
+  background: linear-gradient(135deg, var(--carbon-black), #1c1c1c);
+  color: var(--stark-white);
   padding: var(--space-4xs) var(--space-3xs);
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  box-shadow: 3px 3px 0 var(--carbon-black);
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.45),
+    3px 3px 0 var(--electric-red);
   cursor: pointer;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .map-shell__control-button:hover {
   transform: translateY(-1px);
-  box-shadow: 4px 4px 0 var(--carbon-black);
+  box-shadow:
+    0 14px 34px rgba(0, 0, 0, 0.5),
+    4px 4px 0 var(--electric-red);
 }
 
 .map-shell__control-button:active {
   transform: translateY(0);
-  box-shadow: 2px 2px 0 var(--carbon-black);
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.35),
+    2px 2px 0 var(--electric-red);
 }
 
 .map-shell__control-button--icon {
@@ -50,13 +58,17 @@
   padding: 0;
   font-size: var(--text-card);
   border-radius: 999px;
+  background: linear-gradient(135deg, var(--electric-red), #9f0f1f);
 }
 
 .event-map {
   height: min(60vh, 540px);
   min-height: 360px;
   width: 100%;
-  background: var(--carbon-black);
+  background:
+    radial-gradient(circle at 30% 20%, rgba(224, 79, 95, 0.2), transparent 32%),
+    radial-gradient(circle at 75% 16%, rgba(255, 219, 88, 0.16), transparent 40%),
+    var(--carbon-black);
   position: relative;
   isolation: isolate;
 }
@@ -65,24 +77,48 @@
   pointer-events: none;
 }
 
-.event-map::after {
+.event-map::before {
   content: "";
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(
-      145deg,
-      rgba(224, 79, 95, 0.1),
-      rgba(255, 205, 86, 0.05)
+  background-image: linear-gradient(
+      120deg,
+      rgba(255, 255, 255, 0.06) 0,
+      rgba(255, 255, 255, 0.04) 32%,
+      transparent 32%
     ),
-    rgba(0, 0, 0, 0.05);
-  mix-blend-mode: screen;
+    linear-gradient(
+      300deg,
+      rgba(224, 79, 95, 0.08) 0,
+      rgba(224, 79, 95, 0.06) 26%,
+      transparent 26%
+    );
+  background-size: 18px 18px, 28px 28px;
+  opacity: 0.45;
   pointer-events: none;
   z-index: 1;
 }
 
-.leaflet-pane.leaflet-tile-pane {
-  filter: none;
+.event-map::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(140deg, rgba(224, 79, 95, 0.18), rgba(255, 219, 88, 0.14));
+  mix-blend-mode: soft-light;
+  opacity: 0.85;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.meatup-tile {
+  filter:
+    grayscale(1)
+    sepia(0.32)
+    hue-rotate(-8deg)
+    saturate(1.5)
+    contrast(1.05)
+    brightness(0.94);
+  opacity: 0.9;
 }
 
 .map-shell__click-capture {
@@ -125,17 +161,37 @@ body.map-fullscreen-active {
 }
 
 .leaflet-control-container .leaflet-bottom.leaflet-right .leaflet-control-zoom {
-  border: 2px solid var(--carbon-black);
-  box-shadow: 3px 3px 0 var(--carbon-black);
+  border: 2px solid var(--stark-white);
+  box-shadow:
+    0 12px 32px rgba(0, 0, 0, 0.45),
+    4px 4px 0 var(--electric-red);
+  background: rgba(17, 17, 17, 0.9);
 }
 
 .leaflet-control-zoom a {
-  background: var(--mustard-yellow);
-  color: var(--carbon-black);
+  background: transparent;
+  color: var(--stark-white);
 }
 
 .leaflet-control-zoom a:hover {
-  background: rgba(255, 205, 86, 0.8);
+  background: rgba(224, 79, 95, 0.14);
+  color: var(--mustard-yellow);
+}
+
+.leaflet-control-attribution {
+  background: rgba(17, 17, 17, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+  color: var(--stark-white);
+  padding: 0.35rem 0.8rem;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.4);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.leaflet-control-attribution a {
+  color: var(--stark-white);
+  font-weight: 700;
 }
 
 .meat-marker {
@@ -159,47 +215,47 @@ body.map-fullscreen-active {
 }
 
 .meat-marker__body.marker--default {
-  background: linear-gradient(145deg, #f76a6a, var(--electric-red));
+  background: linear-gradient(145deg, #1a1a1a, var(--electric-red));
 }
 
 .meat-marker__body.marker--texas {
-  background: linear-gradient(145deg, #fcb045, #f12711);
+  background: linear-gradient(150deg, var(--mustard-yellow), #f5b52c);
 }
 
 .meat-marker__body.marker--smoke {
-  background: linear-gradient(160deg, #1f1f1f, #f44336);
+  background: linear-gradient(145deg, #0f0f0f, #f05a5a);
 }
 
 .meat-marker__body.marker--chop {
-  background: linear-gradient(145deg, #e04f5f, #b71c1c);
+  background: linear-gradient(145deg, var(--electric-red), #9f0f1f);
 }
 
 .meat-marker__body.marker--butter {
-  background: linear-gradient(145deg, #ffdd67, #f4c542);
+  background: linear-gradient(145deg, var(--mustard-yellow), #f8c948);
 }
 
 .meat-marker__body.marker--black {
-  background: linear-gradient(160deg, #0f0f0f, #3a3a3a);
+  background: linear-gradient(160deg, #0b0b0b, #232323);
 }
 
 .meat-marker__body.marker--burger {
-  background: linear-gradient(145deg, #f76b1c, #fad961);
+  background: linear-gradient(145deg, #f5b52c, var(--electric-red));
 }
 
 .meat-marker__body.marker--fowl {
-  background: linear-gradient(145deg, #ff8c37, #f64f59);
+  background: linear-gradient(145deg, #f5b52c, #f05a5a);
 }
 
 .meat-marker__body.marker--guinea {
-  background: linear-gradient(145deg, #ff5f6d, #ffc371);
+  background: linear-gradient(145deg, var(--electric-red), #f5b52c);
 }
 
 .meat-marker__body.marker--market {
-  background: linear-gradient(145deg, #7f7fd5, #91eae4);
+  background: linear-gradient(145deg, #141414, #2f2f2f);
 }
 
 .meat-marker__body.marker--pub {
-  background: linear-gradient(145deg, #1c1f26, #f9d423);
+  background: linear-gradient(145deg, #0f0f0f, #f5b52c);
 }
 
 .meat-marker__body::after {
@@ -246,15 +302,11 @@ body.map-fullscreen-active {
 }
 
 .leaflet-tooltip.meat-tooltip {
-  background:
-    linear-gradient(
-      135deg,
-      rgba(224, 79, 95, 0.16),
-      rgba(255, 255, 255, 0.08)
-    ),
-    rgba(0, 0, 0, 0.9);
-  border: 2px solid var(--stark-white);
-  box-shadow: 3px 3px 0 var(--carbon-black);
+  background: rgba(17, 17, 17, 0.94);
+  border: 2px solid var(--electric-red);
+  box-shadow:
+    0 16px 32px rgba(0, 0, 0, 0.45),
+    3px 3px 0 var(--carbon-black);
   border-radius: 14px;
   padding: var(--space-3xs) var(--space-xs);
 }
@@ -274,7 +326,7 @@ body.map-fullscreen-active {
 .meat-tooltip__meta {
   margin: 0;
   font-size: var(--step--1);
-  opacity: 0.8;
+  color: var(--mustard-yellow);
 }
 
 .meat-cluster-wrapper {
@@ -289,11 +341,13 @@ body.map-fullscreen-active {
   background:
     linear-gradient(
       135deg,
-      rgba(224, 79, 95, 0.9),
-      rgba(255, 205, 86, 0.95)
+      rgba(224, 79, 95, 0.92),
+      rgba(255, 219, 88, 0.92)
     );
-  border: 3px solid var(--carbon-black);
-  box-shadow: 4px 4px 0 var(--carbon-black);
+  border: 3px solid var(--stark-white);
+  box-shadow:
+    0 12px 26px rgba(0, 0, 0, 0.45),
+    4px 4px 0 var(--carbon-black);
   display: grid;
   place-items: center;
   font-weight: 800;

@@ -188,6 +188,7 @@ export default function EventMapClient({ events }: { events: MapEvent[] }) {
   const mapRef = useRef<LeafletMap | null>(null);
   const markerLayerRef = useRef<MarkerClusterGroup | null>(null);
   const zoomControlRef = useRef<Control.Zoom | null>(null);
+  const attributionControlRef = useRef<Control.Attribution | null>(null);
   const [geocoded, setGeocoded] = useState<GeocodedEvent[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -208,13 +209,23 @@ export default function EventMapClient({ events }: { events: MapEvent[] }) {
       const map = L.map(mapContainerRef.current, {
         zoomControl: false,
         worldCopyJump: true,
+        attributionControl: false,
       });
 
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         maxZoom: 18,
-        attribution:
-          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>',
+        className: "meatup-tile",
       }).addTo(map);
+
+      const attribution = L.control.attribution({
+        position: "bottomleft",
+        prefix: "",
+      });
+      attribution.addAttribution(
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      );
+      attribution.addTo(map);
+      attributionControlRef.current = attribution;
 
       map.setView(DEFAULT_CENTER, DEFAULT_ZOOM);
       mapRef.current = map;
@@ -223,6 +234,10 @@ export default function EventMapClient({ events }: { events: MapEvent[] }) {
         if (zoomControlRef.current) {
           map.removeControl(zoomControlRef.current);
           zoomControlRef.current = null;
+        }
+        if (attributionControlRef.current) {
+          map.removeControl(attributionControlRef.current);
+          attributionControlRef.current = null;
         }
         map.remove();
         mapRef.current = null;
@@ -311,7 +326,7 @@ export default function EventMapClient({ events }: { events: MapEvent[] }) {
 
       const layer = L.markerClusterGroup({
         showCoverageOnHover: false,
-        spiderLegPolylineOptions: { weight: 2, color: "#000" },
+        spiderLegPolylineOptions: { weight: 2, color: "#e04f5f", opacity: 0.85 },
         maxClusterRadius: 48,
         iconCreateFunction(cluster) {
           const count = cluster.getChildCount();
