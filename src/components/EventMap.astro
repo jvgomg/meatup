@@ -1,0 +1,24 @@
+---
+import { getEntry } from "astro:content";
+import EventMapClient from "./EventMapClient";
+
+const entry = await getEntry("events", "events");
+if (!entry) throw new Error("Events not found for map");
+
+const normalizedEvents = entry.data.map((event) => ({
+  ...event,
+  status: event.status ?? "scheduled",
+  attendees: event.attendees ?? [],
+}));
+
+const eventsDescending = normalizedEvents
+  .toSorted((a, b) => b.date.getTime() - a.date.getTime())
+  .map((event, index, list) => ({
+    ...event,
+    id: `${event.date.toISOString()}-${event.primaryVenue.name}`,
+    date: event.date.toISOString(),
+    eventNumber: list.length - index,
+  }));
+---
+
+<EventMapClient client:only="react" events={eventsDescending} />

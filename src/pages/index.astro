@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import EventList from "../components/EventList.astro";
 import Header from "../components/Header.astro";
+import EventMap from "../components/EventMap.astro";
 ---
 
 <Layout>
@@ -14,6 +15,19 @@ import Header from "../components/Header.astro";
         eating meat. We host regular "meatings" to share our passion and our
         plates.
       </p>
+    </section>
+
+    <section id="map" class="map-section">
+      <div class="map-section__header">
+        <p class="eyebrow">Where we meat</p>
+        <h2>On the map</h2>
+        <p class="map-section__copy">
+          Every meat up pinned with a custom steak marker—hover to peek at the
+          venue, date, and crew. Powered by OpenStreetMap tiles, no API keys
+          required.
+        </p>
+      </div>
+      <EventMap />
     </section>
 
     <section id="meatings" class="past-meatings">
@@ -64,6 +78,30 @@ import Header from "../components/Header.astro";
     text-align: center;
     font-size: var(--text-section);
     margin-bottom: var(--space-l);
+  }
+
+  .map-section {
+    padding: var(--space-2xl) var(--space-l);
+    display: grid;
+    gap: var(--space-m);
+  }
+
+  .map-section__header {
+    max-width: 48rem;
+    margin: 0 auto;
+    text-align: center;
+    display: grid;
+    gap: var(--space-3xs);
+  }
+
+  .map-section h2 {
+    font-size: var(--text-section);
+  }
+
+  .map-section__copy {
+    opacity: 0.8;
+    font-size: var(--step-0);
+    text-wrap: balance;
   }
 
   footer {
