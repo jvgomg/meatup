@@ -209,11 +209,11 @@
   note: "Festive steak night target; booking window not open yet."
   attendees:
     - Alex T
+    - James G
+    - James Ge
     - Martin J
     - Rico
-    - James Ge
-    - James G
-    - Matt R
+    - Thorsten K
 
 - date: 2026-02-26
   status: scheduled
@@ -221,10 +221,4 @@
     name: "Oak & Smoke"
     address: "4 Charlotte Street, Fitzrovia, London W1T 2LP"
     googleMapsLink: "https://maps.app.goo.gl/wkFpMi2fPKVSdz6i9"
-  attendees:
-    - Alex T
-    - James G
-    - James Ge
-    - Martin J
-    - Rico
-    - Thorsten K
+  attendees: []
