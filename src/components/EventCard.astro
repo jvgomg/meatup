@@ -173,7 +173,9 @@ function formatDate(date: Date): string {
     {
       attendees.length > 0 && (
         <div class="attendees">
-          <span class="attendees__label">Attendees</span>
+          <span class="attendees__label">
+            {status === "scheduled" ? "Attending" : "Attendees"}
+          </span>
           <ul class="attendees__list">
             {attendees.map((attendee) => {
               const initial = attendee.slice(0, 1).toUpperCase();

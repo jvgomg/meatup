@@ -221,4 +221,7 @@
     name: "Oak & Smoke"
     address: "4 Charlotte Street, Fitzrovia, London W1T 2LP"
     googleMapsLink: "https://maps.app.goo.gl/wkFpMi2fPKVSdz6i9"
-  attendees: []
+  attendees:
+    - Alex T
+    - Martin J
+    - Rico
