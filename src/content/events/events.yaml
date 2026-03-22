@@ -234,11 +234,13 @@
   primaryVenue:
     name: "Asador Guetaria"
     googleMapsLink: "https://maps.app.goo.gl/KLGsRLEQVtuBMwQk9"
+  note: "Martin's stag do in San Sebastián."
   attendees:
     - Martin J
     - Rico
     - Alex T
     - James Ge
+  guests:
     - John-Mark Chandler-Clark
     - Jonny Cox
     - Tim Hill
@@ -246,6 +248,7 @@
 
 - date: 2026-03-23
   status: scheduled
+  note: "Martin's stag do in San Sebastián."
   primaryVenue:
     name: "Atari Gastrolekua"
     address: "Calle Mayor 18, 20003 San Sebastián, Spain"
@@ -254,5 +257,6 @@
     - Alex T
     - Martin J
     - James Ge
+  guests:
     - Dave Clark
     - Dave Jay
