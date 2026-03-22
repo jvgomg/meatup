@@ -17,6 +17,7 @@ interface Props {
   secondaryVenues?: Venue[];
   note?: string;
   attendees: string[];
+  guests?: string[];
 }
 
 const {
@@ -27,6 +28,7 @@ const {
   status = "scheduled",
   note,
   attendees,
+  guests,
 } = Astro.props;
 
 const statusLabels: Record<EventStatus, string> = {
@@ -171,7 +173,7 @@ function formatDate(date: Date): string {
       )
     }
     {
-      attendees.length > 0 && (
+      (attendees.length > 0 || (guests && guests.length > 0)) && (
         <div class="attendees">
           <span class="attendees__label">{status === "scheduled" ? "Attending" : "Attendees"}</span>
           <ul class="attendees__list">
@@ -191,6 +193,25 @@ function formatDate(date: Date): string {
                     <span aria-hidden="true">{initial}</span>
                   </span>
                   <span class="attendee__name">{attendee}</span>
+                </li>
+              );
+            })}
+            {guests && guests.map((guest) => {
+              const initial = guest.slice(0, 1).toUpperCase();
+              const colors = getAttendeeColors(guest);
+              return (
+                <li
+                  class="attendee attendee--guest"
+                  title={guest}
+                  style={{
+                    "--attendee-bg": colors.bg,
+                    "--attendee-fg": colors.fg,
+                  }}
+                >
+                  <span class="attendee__avatar">
+                    <span aria-hidden="true">{initial}</span>
+                  </span>
+                  <span class="attendee__name">{guest}</span>
                 </li>
               );
             })}
@@ -385,6 +406,15 @@ function formatDate(date: Date): string {
     transition:
       background 0.2s ease,
       box-shadow 0.2s ease;
+  }
+
+  .attendee--guest {
+    border-style: dashed;
+    opacity: 0.75;
+  }
+
+  .attendee--guest:hover {
+    opacity: 1;
   }
 
   .attendee:hover {
