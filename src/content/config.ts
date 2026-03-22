@@ -16,6 +16,7 @@ const events = defineCollection({
       secondaryVenues: z.array(venueSchema).optional(),
       note: z.string().optional(),
       attendees: z.array(z.string()),
+      guests: z.array(z.string()).optional(),
     }),
   ),
 })
