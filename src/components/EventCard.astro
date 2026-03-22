@@ -381,7 +381,7 @@ function formatDate(date: Date): string {
     align-items: center;
     gap: var(--space-4xs);
     background: rgba(255, 255, 255, 0.02);
-    padding: var(--space-4xs) var(--space-3xs);
+    padding: var(--space-4xs) var(--space-2xs) var(--space-4xs) var(--space-3xs);
     transition:
       background 0.2s ease,
       box-shadow 0.2s ease;
@@ -432,4 +432,36 @@ function formatDate(date: Date): string {
   .attendee:hover .attendee__avatar {
     transform: translateY(-1px);
   }
+
+  .attendee.active {
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .attendee.active .attendee__name {
+    max-width: 11rem;
+    opacity: 1;
+    padding-left: var(--space-3xs);
+    padding-right: var(--space-3xs);
+    visibility: visible;
+  }
+
+  .attendee.active .attendee__avatar {
+    transform: translateY(-1px);
+  }
 </style>
+
+<script>
+  document.querySelectorAll('.attendee').forEach((el) => {
+    el.addEventListener('click', () => {
+      const wasActive = el.classList.contains('active');
+      // Close any other open attendee in the same list
+      el.closest('.attendees__list')?.querySelectorAll('.attendee.active').forEach((other) => {
+        other.classList.remove('active');
+      });
+      if (!wasActive) {
+        el.classList.add('active');
+      }
+    });
+  });
+</script>
