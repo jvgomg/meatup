@@ -83,7 +83,7 @@ function formatDate(date: Date): string {
 }
 ---
 
-<li class:list={["event", eventToneClass]}>
+<li class:list={["event", eventToneClass]} data-event-date={date.toISOString()} data-event-status={status}>
   <div class="event-number">
     <span class="leading-zeros">{leadingZeros}</span>{eventNumberStr}
   </div>

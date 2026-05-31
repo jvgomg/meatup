@@ -5,6 +5,8 @@ import EventCard from "./EventCard.astro";
 const entry = await getEntry("events", "events");
 if (!entry) throw new Error("Events not found");
 const upcomingStatuses = new Set(["scheduled"]);
+const now = new Date();
+now.setHours(0, 0, 0, 0);
 const normalizedEvents = entry.data.map((event) => ({
   ...event,
   status: event.status ?? "scheduled",
@@ -21,7 +23,7 @@ const eventsDescending = normalizedEvents
   });
 
 const upcomingEvents = eventsDescending
-  .filter((event) => upcomingStatuses.has(event.status))
+  .filter((event) => upcomingStatuses.has(event.status) && event.date >= now)
   .toSorted((a, b) => b.date.getTime() - a.date.getTime());
 
 const pastEvents = eventsDescending.filter(
@@ -246,11 +248,11 @@ const formatNameList = (names: string[]) =>
 
   {
     upcomingEvents.length > 0 && (
-      <div class="events-group">
+      <div class="events-group" data-upcoming-group>
         <header class="events-group__header">
           <p class="eyebrow">Upcoming meatings</p>
         </header>
-        <ul class="events">
+        <ul class="events" data-upcoming-list>
           {upcomingEvents.map((event) => (
             <EventCard {...event} />
           ))}
@@ -261,7 +263,7 @@ const formatNameList = (names: string[]) =>
 
   {
     upcomingEvents.length === 0 && (
-      <div class="events-group events-group--empty">
+      <div class="events-group events-group--empty" data-empty-group>
         <header class="events-group__header">
           <p class="eyebrow">Upcoming meatings</p>
           <p class="empty__title">None on the books</p>
@@ -277,11 +279,11 @@ const formatNameList = (names: string[]) =>
 
   {
     pastEvents.length > 0 && (
-      <div class="events-group">
+      <div class="events-group" data-past-group>
         <header class="events-group__header">
           <p class="eyebrow">Past meatings</p>
         </header>
-        <ul class="events">
+        <ul class="events" data-past-list>
           {pastEvents.map((event) => (
             <EventCard {...event} />
           ))}
@@ -354,6 +356,57 @@ const formatNameList = (names: string[]) =>
       observer.observe(summary);
     }
   }
+
+  // Re-categorize scheduled events whose date has passed without a rebuild
+  (function recategorizeEvents() {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const upcomingGroup = document.querySelector<HTMLElement>('[data-upcoming-group]');
+    const upcomingList = document.querySelector<HTMLElement>('[data-upcoming-list]');
+    const pastList = document.querySelector<HTMLElement>('[data-past-list]');
+
+    if (!upcomingList) return;
+
+    const stale = Array.from(
+      upcomingList.querySelectorAll<HTMLElement>('[data-event-status="scheduled"]')
+    ).filter(card => {
+      const d = new Date(card.getAttribute('data-event-date') ?? '');
+      d.setHours(0, 0, 0, 0);
+      return d < today;
+    });
+
+    if (stale.length === 0) return;
+
+    stale.forEach(card => {
+      if (pastList) {
+        pastList.prepend(card);
+      }
+    });
+
+    if (upcomingList.children.length === 0 && upcomingGroup) {
+      upcomingGroup.hidden = true;
+      // Show or create the empty state
+      let emptyGroup = document.querySelector<HTMLElement>('[data-empty-group]');
+      if (!emptyGroup) {
+        emptyGroup = upcomingGroup.cloneNode(false) as HTMLElement;
+        emptyGroup.removeAttribute('data-upcoming-group');
+        emptyGroup.setAttribute('data-empty-group', '');
+        emptyGroup.classList.add('events-group--empty');
+        emptyGroup.innerHTML = `
+          <header class="events-group__header">
+            <p class="eyebrow">Upcoming meatings</p>
+            <p class="empty__title">None on the books</p>
+          </header>
+          <div class="empty__card">
+            <p class="empty__copy">Time to raise the steaks and pencil in the next one.</p>
+          </div>`;
+        upcomingGroup.insertAdjacentElement('afterend', emptyGroup);
+      } else {
+        emptyGroup.hidden = false;
+      }
+    }
+  })();
 
   const punTarget = document.querySelector<HTMLElement>('[data-pun]');
   if (punTarget) {
