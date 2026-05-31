@@ -260,3 +260,16 @@
   guests:
     - Dave Clark
     - Dave Jay
+
+- date: 2026-06-03
+  status: scheduled
+  primaryVenue:
+    name: "Smoking Goat Shoreditch"
+    googleMapsLink: "https://maps.app.goo.gl/SC8cqbw1tmweiZtY8"
+  attendees:
+    - Alex T
+    - Martin J
+    - James G
+    - James Ge
+    - Rico
+    - Thorsten K
