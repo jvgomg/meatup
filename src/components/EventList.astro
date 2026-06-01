@@ -4,12 +4,13 @@ import EventCard from "./EventCard.astro";
 
 const entry = await getEntry("events", "events");
 if (!entry) throw new Error("Events not found");
-const upcomingStatuses = new Set(["scheduled"]);
 const now = new Date();
 now.setHours(0, 0, 0, 0);
+// Status is derived from date — not stored in the YAML. Only genuinely
+// ambiguous state (the event happened but went wrong) needs an explicit flag.
 const normalizedEvents = entry.data.map((event) => ({
   ...event,
-  status: event.status ?? "scheduled",
+  status: (event.failed ? "failed" : event.date < now ? "completed" : "scheduled") as "completed" | "failed" | "scheduled",
   attendees: event.attendees ?? [],
 }));
 
@@ -23,12 +24,10 @@ const eventsDescending = normalizedEvents
   });
 
 const upcomingEvents = eventsDescending
-  .filter((event) => upcomingStatuses.has(event.status) && event.date >= now)
+  .filter((event) => event.status === "scheduled")
   .toSorted((a, b) => b.date.getTime() - a.date.getTime());
 
-const pastEvents = eventsDescending.filter(
-  (event) => !upcomingStatuses.has(event.status) || event.date < now
-);
+const pastEvents = eventsDescending.filter((event) => event.status !== "scheduled");
 
 const totalEvents = pastEvents.length;
 const totalAttendees = pastEvents.reduce(
