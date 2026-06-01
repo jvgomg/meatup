@@ -27,7 +27,7 @@ const upcomingEvents = eventsDescending
   .toSorted((a, b) => b.date.getTime() - a.date.getTime());
 
 const pastEvents = eventsDescending.filter(
-  (event) => !upcomingStatuses.has(event.status)
+  (event) => !upcomingStatuses.has(event.status) || event.date < now
 );
 
 const totalEvents = pastEvents.length;
