@@ -257,3 +257,20 @@
     - James Ge
     - Rico
     - Thorsten K
+
+- date: 2026-07-22
+  primaryVenue:
+    name: "Uncle Hon's BBQ"
+    address: "Unit 7, Queen's Yard, London E9 5EN"
+    googleMapsLink: "https://maps.google.com/?q=Uncle+Hons+BBQ,+Unit+7+Queens+Yard,+London+E9+5EN"
+  secondaryVenues:
+    - name: "Howling Hops"
+      address: "Unit 9A Queens Yard, White Post Lane, Hackney Wick, London E9 5EN"
+      googleMapsLink: "https://maps.google.com/?q=Howling+Hops,+Unit+9A+Queens+Yard,+London+E9+5EN"
+  attendees:
+    - Alex T
+    - Martin J
+    - Thorsten K
+    - Rico
+    - James Ge
+    - Ali A
