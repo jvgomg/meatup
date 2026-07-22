@@ -247,7 +247,7 @@
     - Alex Hill
 
 - date: 2026-03-23
-  status: scheduled
+  status: completed
   note: "Martin's stag do in San Sebastián."
   primaryVenue:
     name: "Atari Gastrolekua"
@@ -260,3 +260,21 @@
   guests:
     - Dave Clark
     - Dave Jay
+
+- date: 2026-07-22
+  status: scheduled
+  primaryVenue:
+    name: "Uncle Hon's BBQ"
+    address: "Unit 7, Queen's Yard, London E9 5EN"
+    googleMapsLink: "https://maps.google.com/?q=Uncle+Hons+BBQ,+Unit+7+Queens+Yard,+London+E9+5EN"
+  secondaryVenues:
+    - name: "Howling Hops"
+      address: "Unit 9A Queens Yard, White Post Lane, Hackney Wick, London E9 5EN"
+      googleMapsLink: "https://maps.google.com/?q=Howling+Hops,+Unit+9A+Queens+Yard,+London+E9+5EN"
+  attendees:
+    - Alex T
+    - Martin J
+    - Thorsten K
+    - Rico
+    - James Ge
+    - Ali A
