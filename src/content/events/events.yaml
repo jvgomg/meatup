@@ -233,6 +233,7 @@
     - Alex Hill
 
 - date: 2026-03-23
+  status: completed
   note: "Martin's stag do in San Sebastián."
   primaryVenue:
     name: "Atari Gastrolekua"
@@ -246,6 +247,8 @@
     - Dave Clark
     - Dave Jay
 
+- date: 2026-07-22
+  status: scheduled
 - date: 2026-06-03
   primaryVenue:
     name: "Smoking Goat Shoreditch"
