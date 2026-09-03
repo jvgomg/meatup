@@ -15,7 +15,9 @@
     "astro:build": "astro build",
     "astro:preview": "astro preview",
     "astro": "astro",
-    "typecheck": "astro check"
+    "typecheck": "astro check",
+    "test": "vitest run",
+    "telegram:simulate": "tsx scripts/simulate-telegram.ts"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.6",
@@ -29,10 +31,13 @@
     "react": "^19.2.1",
     "react-dom": "^19.2.1",
     "sharp": "^0.34.5",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "zod": "^3.25.76"
   },
   "devDependencies": {
     "postcss-utopia": "^1.1.0",
-    "turbo": "^2.6.3"
+    "tsx": "^4.20.6",
+    "turbo": "^2.6.3",
+    "vitest": "^3.2.4"
   }
 }
