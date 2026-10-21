@@ -54,6 +54,28 @@ for (const event of pastEvents) {
   }
 }
 
+// Leaderboard counts every meatup up to and including today, so a meatup
+// happening today shows up straight away rather than after it's "past".
+const leaderboardCounts = new Map<string, number>();
+for (const event of normalizedEvents) {
+  if (event.date > now) continue;
+  for (const attendee of event.attendees) {
+    leaderboardCounts.set(attendee, (leaderboardCounts.get(attendee) ?? 0) + 1);
+  }
+}
+const leaderboardSorted = [...leaderboardCounts.entries()].toSorted(
+  ([nameA, a], [nameB, b]) => b - a || nameA.localeCompare(nameB)
+);
+const leaderboardTop = leaderboardSorted[0]?.[1] ?? 0;
+// Standard competition ranking: ties share a rank, the next rank skips.
+const leaderboard = leaderboardSorted.map(([name, count], index, list) => ({
+  name,
+  count,
+  rank: list.findIndex(([, c]) => c === count) + 1,
+  isTied:
+    list[index - 1]?.[1] === count || list[index + 1]?.[1] === count,
+}));
+
 let mostAttended: string[] = [];
 let leastAttended: string[] = [];
 let mostAttendedCount = 0;
@@ -244,6 +266,31 @@ const formatNameList = (names: string[]) =>
       </div>
     </div>
   </div>
+
+  {
+    leaderboard.length > 0 && (
+      <div class="leaderboard">
+        <div class="summary__header">
+          <p class="eyebrow">Hall of flame</p>
+          <p class="summary__title">Leaderboard</p>
+        </div>
+        <ol class="leaderboard__list">
+          {leaderboard.map((row) => (
+            <li
+              class:list={["leaderboard__row", { "leaderboard__row--top": row.rank === 1 }]}
+              style={{ "--bar": `${(row.count / leaderboardTop) * 100}%` }}
+            >
+              <span class="leaderboard__rank">
+                {row.isTied ? `=${row.rank}` : row.rank}
+              </span>
+              <span class="leaderboard__name">{row.name}</span>
+              <span class="leaderboard__count">{pluralizeMeatings(row.count)}</span>
+            </li>
+          ))}
+        </ol>
+      </div>
+    )
+  }
 
   {
     upcomingEvents.length > 0 && (
@@ -568,6 +615,70 @@ const formatNameList = (names: string[]) =>
     margin: 0;
     margin-top: var(--space-2xs);
     line-height: 1.4;
+  }
+
+  .leaderboard {
+    display: grid;
+    gap: var(--space-m);
+    padding: var(--space-m);
+    border: 2px solid var(--carbon-black);
+    background: rgba(255, 255, 255, 0.04);
+    box-shadow: 3px 3px 0 var(--carbon-black);
+  }
+
+  .leaderboard__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: var(--space-2xs);
+  }
+
+  .leaderboard__row {
+    position: relative;
+    display: grid;
+    grid-template-columns: 3ch 1fr auto;
+    align-items: center;
+    gap: var(--space-s);
+    padding: var(--space-2xs) var(--space-s);
+    border-radius: var(--radius, 0.5rem);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    overflow: hidden;
+  }
+
+  .leaderboard__row::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    width: var(--bar);
+    background: rgba(255, 205, 86, 0.14);
+    pointer-events: none;
+  }
+
+  .leaderboard__row--top::before {
+    background: rgba(255, 205, 86, 0.3);
+  }
+
+  .leaderboard__rank,
+  .leaderboard__name,
+  .leaderboard__count {
+    position: relative;
+  }
+
+  .leaderboard__rank {
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--mustard-yellow);
+  }
+
+  .leaderboard__name {
+    font-weight: 600;
+  }
+
+  .leaderboard__count {
+    font-size: var(--step--1);
+    opacity: 0.85;
+    white-space: nowrap;
   }
 
   .events-group {

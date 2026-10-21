@@ -278,7 +278,11 @@
 - date: 2026-10-21
   primaryVenue:
     name: "Axe & Ember"
-    googleMapsLink: "https://maps.google.com/?q=Axe+%26+Ember,+London"
+    googleMapsLink: "https://maps.google.com/?q=Axe+%26+Ember,+Walthamstow,+London"
+  secondaryVenues:
+    - name: "The Village"
+      address: "31 Orford Road, Walthamstow, London E17 9NL"
+      googleMapsLink: "https://maps.google.com/?q=The+Village,+31+Orford+Road,+Walthamstow,+London+E17+9NL"
   attendees:
     - Alex T
     - Rico
