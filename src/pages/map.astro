@@ -1,0 +1,387 @@
+---
+import { getEntry } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+import Navigation from "../components/Navigation.astro";
+
+const entry = await getEntry("events", "events");
+if (!entry) throw new Error("Events not found");
+
+const now = new Date();
+now.setHours(0, 0, 0, 0);
+
+interface Place {
+  name: string;
+  address?: string;
+  googleMapsLink?: string;
+  coordinates?: [number, number];
+  mainVisits: Date[];
+  preDrinkVisits: Date[];
+}
+
+// One entry per venue name, so repeat visits stack onto a single pin.
+// globalThis: astro check names this page component `Map`, shadowing the builtin.
+const places = new globalThis.Map<string, Place>();
+const addVisit = (
+  venue: (typeof entry.data)[number]["primaryVenue"],
+  date: Date,
+  role: "main" | "preDrinks"
+) => {
+  const place = places.get(venue.name) ?? {
+    name: venue.name,
+    mainVisits: [],
+    preDrinkVisits: [],
+  };
+  place.address ??= venue.address;
+  place.googleMapsLink ??= venue.googleMapsLink;
+  place.coordinates ??= venue.coordinates;
+  (role === "main" ? place.mainVisits : place.preDrinkVisits).push(date);
+  places.set(venue.name, place);
+};
+
+for (const event of entry.data) {
+  if (event.date > now) continue;
+  addVisit(event.primaryVenue, event.date, "main");
+  for (const venue of event.secondaryVenues ?? []) {
+    addVisit(venue, event.date, "preDrinks");
+  }
+}
+
+const formatDate = (date: Date) =>
+  date.toLocaleDateString("en-GB", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
+
+const allPlaces = [...places.values()].toSorted(
+  (a, b) =>
+    b.mainVisits.length + b.preDrinkVisits.length -
+      (a.mainVisits.length + a.preDrinkVisits.length) ||
+    a.name.localeCompare(b.name)
+);
+
+const pins = allPlaces
+  .filter((place) => place.coordinates)
+  .map((place) => ({
+    name: place.name,
+    address: place.address,
+    googleMapsLink: place.googleMapsLink,
+    coordinates: place.coordinates!,
+    kind: place.mainVisits.length > 0 ? "main" : "preDrinks",
+    visits: [
+      ...place.mainVisits.map((d) => ({ date: d, role: "Meatup" })),
+      ...place.preDrinkVisits.map((d) => ({ date: d, role: "Pre-drinks" })),
+    ]
+      .toSorted((a, b) => a.date.getTime() - b.date.getTime())
+      .map((v) => `${formatDate(v.date)} · ${v.role}`),
+  }));
+
+const unmapped = allPlaces.filter((place) => !place.coordinates);
+const mainCount = allPlaces.filter((p) => p.mainVisits.length > 0).length;
+const preDrinksCount = allPlaces.length - mainCount;
+---
+
+<Layout>
+  <header class="map-header">
+    <Navigation />
+    <div class="map-intro">
+      <p class="eyebrow">Where we've eaten</p>
+      <h1>The Meat Map</h1>
+      <p class="map-intro__meta">
+        {mainCount} meatup venues · {preDrinksCount} pre-drink spots
+      </p>
+    </div>
+  </header>
+
+  <main class="map-page">
+    <div class="map-controls" role="group" aria-label="Map area">
+      <button type="button" data-region="london" aria-pressed="true">London</button>
+      <button type="button" data-region="all" aria-pressed="false">Everywhere</button>
+    </div>
+
+    <div id="meat-map" class="map" data-pins={JSON.stringify(pins)}></div>
+
+    <ul class="legend">
+      <li><span class="legend__dot legend__dot--main"></span> Meatup venue</li>
+      <li><span class="legend__dot legend__dot--pre"></span> Pre-drinks</li>
+      <li class="legend__note">Bigger pin = more visits</li>
+    </ul>
+
+    <section class="places">
+      <h2>Every place</h2>
+      <ol class="places__list">
+        {
+          allPlaces.map((place) => (
+            <li class="place">
+              <span
+                class:list={[
+                  "legend__dot",
+                  place.mainVisits.length > 0 ? "legend__dot--main" : "legend__dot--pre",
+                ]}
+              />
+              <span class="place__name">{place.name}</span>
+              <span class="place__count">
+                {place.mainVisits.length + place.preDrinkVisits.length}×
+              </span>
+            </li>
+          ))
+        }
+      </ol>
+      {
+        unmapped.length > 0 && (
+          <p class="places__unmapped">
+            Not on the map yet: {unmapped.map((p) => p.name).join(", ")}
+          </p>
+        )
+      }
+    </section>
+  </main>
+</Layout>
+
+<script>
+  import L from "leaflet";
+  import "leaflet/dist/leaflet.css";
+
+  interface Pin {
+    name: string;
+    address?: string;
+    googleMapsLink?: string;
+    coordinates: [number, number];
+    kind: "main" | "preDrinks";
+    visits: string[];
+  }
+
+  const el = document.getElementById("meat-map");
+  if (el) {
+    const pins = JSON.parse(el.dataset.pins ?? "[]") as Pin[];
+
+    const map = L.map(el, { scrollWheelZoom: false });
+    L.tileLayer(
+      "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+      {
+        maxZoom: 19,
+        subdomains: "abcd",
+        attribution:
+          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+      }
+    ).addTo(map);
+
+    const escape = (text: string) =>
+      text.replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`);
+
+    for (const pin of pins) {
+      const isMain = pin.kind === "main";
+      const marker = L.circleMarker(pin.coordinates, {
+        radius: 6 + pin.visits.length * 2,
+        color: "#111111",
+        weight: 2,
+        fillColor: isMain ? "#E04F5F" : "#FFDB58",
+        fillOpacity: 0.9,
+      }).addTo(map);
+
+      marker.bindPopup(`
+        <strong>${escape(pin.name)}</strong>
+        ${pin.address ? `<br><span class="popup__address">${escape(pin.address)}</span>` : ""}
+        <ul class="popup__visits">${pin.visits.map((v) => `<li>${escape(v)}</li>`).join("")}</ul>
+        ${pin.googleMapsLink ? `<a href="${escape(pin.googleMapsLink)}" target="_blank" rel="noopener nofollow">Open in Maps</a>` : ""}
+      `);
+      marker.bindTooltip(pin.name);
+    }
+
+    // The odd trip abroad would zoom the whole map out to Europe, so default
+    // to the London pins and offer "Everywhere" as a toggle.
+    const allBounds = L.latLngBounds(pins.map((p) => p.coordinates));
+    const londonBounds = L.latLngBounds(
+      pins
+        .map((p) => p.coordinates)
+        .filter(([lat, lng]) => Math.abs(lat - 51.5) < 0.5 && Math.abs(lng + 0.1) < 0.6)
+    );
+
+    const show = (region: string) => {
+      const bounds = region === "london" && londonBounds.isValid() ? londonBounds : allBounds;
+      map.fitBounds(bounds, { padding: [30, 30] });
+      document.querySelectorAll<HTMLButtonElement>("[data-region]").forEach((button) => {
+        button.setAttribute("aria-pressed", String(button.dataset.region === region));
+      });
+    };
+
+    document.querySelectorAll<HTMLButtonElement>("[data-region]").forEach((button) => {
+      button.addEventListener("click", () => show(button.dataset.region ?? "all"));
+    });
+
+    if (pins.length) show("london");
+    else map.setView([51.5074, -0.1278], 12);
+  }
+</script>
+
+<style>
+  .map-header {
+    position: relative;
+    background-color: var(--carbon-black);
+    padding: calc(var(--space-3xl, 6rem) + var(--space-s)) var(--space-l) var(--space-l);
+  }
+
+  .map-intro {
+    max-width: 64rem;
+    margin: 0 auto;
+    display: grid;
+    gap: var(--space-2xs);
+  }
+
+  .map-intro h1 {
+    font-family: var(--font-display);
+    font-size: var(--text-hero);
+    text-transform: uppercase;
+    line-height: 0.9;
+    margin: 0;
+  }
+
+  .map-intro__meta {
+    margin: 0;
+    opacity: 0.85;
+  }
+
+  .eyebrow {
+    font-size: var(--text-ui);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin: 0;
+  }
+
+  .map-page {
+    background-color: var(--carbon-black);
+    padding: 0 var(--space-l) var(--space-2xl);
+    display: grid;
+    gap: var(--space-s);
+    max-width: 64rem;
+    margin: 0 auto;
+  }
+
+  .map-controls {
+    display: flex;
+    gap: var(--space-2xs);
+  }
+
+  .map-controls button {
+    font: inherit;
+    font-size: var(--text-ui);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: var(--space-3xs) var(--space-s);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: var(--radius, 0.5rem);
+    background: transparent;
+    color: var(--stark-white);
+    cursor: pointer;
+  }
+
+  .map-controls button[aria-pressed="true"] {
+    background: var(--mustard-yellow);
+    border-color: var(--mustard-yellow);
+    color: var(--carbon-black);
+  }
+
+  .map {
+    height: min(70svh, 40rem);
+    border: 2px solid var(--carbon-black);
+    border-radius: var(--radius, 0.5rem);
+    box-shadow: 3px 3px 0 var(--carbon-black);
+    outline: 1px solid rgba(255, 255, 255, 0.25);
+    background: #1b1b1b;
+  }
+
+  .legend {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-s);
+    font-size: var(--step--1);
+    opacity: 0.85;
+  }
+
+  .legend li {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3xs);
+  }
+
+  .legend__dot {
+    display: inline-block;
+    width: 0.8em;
+    height: 0.8em;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .legend__dot--main {
+    background: var(--electric-red);
+  }
+
+  .legend__dot--pre {
+    background: var(--mustard-yellow);
+  }
+
+  .places {
+    margin-top: var(--space-l);
+    display: grid;
+    gap: var(--space-s);
+  }
+
+  .places h2 {
+    font-family: var(--font-display);
+    font-size: var(--text-section);
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  .places__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+    gap: var(--space-2xs) var(--space-m);
+  }
+
+  .place {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2xs);
+    padding: var(--space-3xs) 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  .place__name {
+    flex: 1;
+  }
+
+  .place__count {
+    font-size: var(--step--1);
+    opacity: 0.7;
+  }
+
+  .places__unmapped {
+    font-size: var(--step--1);
+    opacity: 0.7;
+    margin: 0;
+  }
+
+  /* Leaflet popups render outside this component's scope */
+  :global(.leaflet-popup-content) {
+    font-family: var(--font-body);
+    color: var(--carbon-black);
+  }
+
+  :global(.popup__address) {
+    font-size: 0.85em;
+    opacity: 0.75;
+  }
+
+  :global(.popup__visits) {
+    margin: 0.5em 0;
+    padding-left: 1.1em;
+  }
+</style>

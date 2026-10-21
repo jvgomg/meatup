@@ -4,6 +4,8 @@ const venueSchema = z.object({
   name: z.string(),
   address: z.string().optional(),
   googleMapsLink: z.string().url().optional(),
+  // [latitude, longitude] — used to plot the venue on the map page
+  coordinates: z.tuple([z.number(), z.number()]).optional(),
 })
 
 const events = defineCollection({
